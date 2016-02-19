@@ -1,16 +1,9 @@
 <?php
-$arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+
+
+$arr = array('idu' => 1, 'nom' => "JoanMaria", 'c' => 3,
+		'punt' => 100, 'Location' => 5, 'ida' => 100);
 
 echo json_encode($arr);
-
-echo "2";
-echo EOL;
-echo "JoanMaria";
-echo EOL;
-echo "100";
-echo EOL;
-echo "Location";
-echo EOL;
-echo "4";
 
 ?>
