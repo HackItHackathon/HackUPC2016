@@ -31,7 +31,7 @@ public class SceneController : MonoBehaviour {
         {
             // finish
             //Debug.Log(GameController.getCodeElements());
-            SceneManager.LoadScene(1);            
+            SceneManager.LoadScene("Minigame_1_input");            
         }
         else
         {
