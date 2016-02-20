@@ -18,11 +18,9 @@ public class GameController : MonoBehaviour
 
     public float puntuation = 0;
 
-<<<<<<< HEAD
+
     private PositionController positionController;
-=======
-    //private static string codeElements = "";
->>>>>>> 4be80dfc61230563a746c28e2f896c6f93bfc32e
+
     private int gamenumber = 0;
     private int gameId = 0; // TODO: Joan passam-ho
     private bool isAttacker = true; // TODO: tambe aixo
