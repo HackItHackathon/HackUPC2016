@@ -126,7 +126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22423490, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -36
+      value: -38.25
       objectReference: {fileID: 0}
     - target: {fileID: 22423490, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -134,7 +134,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22423490, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 70
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 22423490, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
       propertyPath: m_SizeDelta.y
@@ -179,6 +179,19 @@ Prefab:
     - target: {fileID: 11413588, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11486456, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 772f0e78a4f3d4587b6bc4b78fbe9763,
+        type: 3}
+    - target: {fileID: 22418596, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 22418596, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01a7610caa397d24aad1b84ca3cb33e1, type: 2}
@@ -282,7 +295,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22496678, guid: 513c9405fe8512546938d651ccc89965, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 37
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 22496678, guid: 513c9405fe8512546938d651ccc89965, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -290,7 +303,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22496678, guid: 513c9405fe8512546938d651ccc89965, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 70
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 22496678, guid: 513c9405fe8512546938d651ccc89965, type: 2}
       propertyPath: m_SizeDelta.y
@@ -340,6 +353,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 11493494, guid: 513c9405fe8512546938d651ccc89965, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 772f0e78a4f3d4587b6bc4b78fbe9763,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 513c9405fe8512546938d651ccc89965, type: 2}
   m_IsPrefabParent: 0
@@ -370,9 +388,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5150a2c9f33fa094c8d8ee6d376046f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  solution: 
   canvas: {fileID: 0}
   messageBox: {fileID: 161304, guid: 892de48cb66b9634d87250f540e37090, type: 2}
   ID: 0
+  puntuation: 0
 --- !u!4 &424770806
 Transform:
   m_ObjectHideFlags: 0
@@ -569,8 +589,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24, y: 110}
-  m_SizeDelta: {x: 200, y: 25}
+  m_AnchoredPosition: {x: 9, y: 96}
+  m_SizeDelta: {x: 169, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &707033585
 MonoBehaviour:
@@ -592,7 +612,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 772f0e78a4f3d4587b6bc4b78fbe9763, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
