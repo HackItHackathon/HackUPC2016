@@ -26,4 +26,11 @@ public class CodeImage : MonoBehaviour {
         sprite.sprite = aux;
     }
 
+    void OnMouseDown()
+    {
+        // this object was clicked - do something
+        //Destroy(this.gameObject);
+        Debug.Log("CLICKED " + sprite.sprite);
+    }
+
 }
