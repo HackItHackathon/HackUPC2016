@@ -7,6 +7,11 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Instantiate (codeImage);
-	}
+        float xSpace = Boundary.maxX - Boundary.minX;
+        float xDelta = xSpace / 5;
+		Instantiate(codeImage, new Vector3(Boundary.minX + xDelta, 0, 0), Quaternion.identity);
+        Instantiate(codeImage, new Vector3(Boundary.minX + 2*xDelta, 0, 0), Quaternion.identity);
+        Instantiate(codeImage, new Vector3(Boundary.minX + 3 * xDelta, 0, 0), Quaternion.identity);
+        Instantiate(codeImage, new Vector3(Boundary.minX + 4 * xDelta, 0, 0), Quaternion.identity);       
+    }
 }
