@@ -29,6 +29,7 @@ public class Login : MonoBehaviour {
         Getuserid myObject = new Getuserid();
         JsonUtility.FromJsonOverwrite(web.text, myObject);
         Debug.Log(myObject.id);
+        GameController.instance.ID = myObject.id;
     }
 	
 }
