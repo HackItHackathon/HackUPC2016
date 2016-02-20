@@ -19,6 +19,8 @@ public class PositionController : MonoBehaviour
 
     public Text coordinates;
     public int timeOut = 30;
+    public float radarRadius;
+    public float scaleFactor;
 
     public static float equR = 6.3844e6f;  // Equatorial radius
     public static float polR = 6.3528e6f;  // Polar radius
@@ -40,6 +42,11 @@ public class PositionController : MonoBehaviour
         victim.ID = -1;
 
         coordinates.text = "";
+
+        SpriteRenderer radarRenderer = radarLines.GetComponent<SpriteRenderer>();
+        scaleFactor = radarRenderer.bounds.size.x / radarRadius;
+        Debug.Log("Bounds: " + radarRenderer.bounds.size.x);
+
         StartCoroutine(locationServiceStart());
         StartCoroutine(locationRefresh());
     }
@@ -60,7 +67,7 @@ public class PositionController : MonoBehaviour
                 break;
         }
         // TEMP
-        coordinates.text = "Llat: " + playerPosition.x + " Lon: " + playerPosition.y;
+        coordinates.text = "Lat: " + Mathf.Rad2Deg * playerPosition.x + " Lon: " + Mathf.Rad2Deg * playerPosition.y;
     }
 
     IEnumerator locationRefresh()
@@ -68,26 +75,26 @@ public class PositionController : MonoBehaviour
         //playerPosition.x = Mathf.Deg2Rad * Input.location.lastData.latitude;
         //playerPosition.y = Mathf.Deg2Rad * Input.location.lastData.longitude;
 
-        playerPosition = new Vector2(41.3892279f, 2.1133999f);
+        playerPosition = new Vector2(41.389247f, 2.1127898f);
         playerPosition *= Mathf.Deg2Rad;
 
         // Get User info
-        //string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + GameController.instance.ID;
-        //WWW web = new WWW(url);
-        //while (!web.isDone) ;
+        string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + GameController.instance.ID;
+        WWW web = new WWW(url);
+        while (!web.isDone) ;
         Getuserinfo user = new Getuserinfo();
-        //JsonUtility.FromJsonOverwrite(web.text, user);
+        JsonUtility.FromJsonOverwrite(web.text, user);
         user.ida = -1;
 
         // Check if we already have a victim selected
         if (user.ida >= 0)
         {
-           // Get victim info
-           //url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + user.ida;
-           // web = new WWW(url);
-           // while (!web.isDone) ;
-           // Getuserinfo aux = new Getuserinfo();
-           // JsonUtility.FromJsonOverwrite(web.text, aux);
+            // Get victim info
+            url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + user.ida;
+            web = new WWW(url);
+            while (!web.isDone) ;
+            Getuserinfo aux = new Getuserinfo();
+            JsonUtility.FromJsonOverwrite(web.text, aux);
 
             if (victim.ID < 0)
             {
@@ -99,11 +106,11 @@ public class PositionController : MonoBehaviour
         else
         {
             // Get near victims info
-            /*
-            url = "http://interact.siliconpeople.net/hackathon/getnearid?id=" + GameController.instance.ID;
+            url = "http://interact.siliconpeople.net/hackathon/getidnear?id=" + GameController.instance.ID;
             web = new WWW(url);
             while (!web.isDone) ;
             Getnearid near = new Getnearid();
+            Debug.Log(web.text);
             JsonUtility.FromJsonOverwrite(web.text, near);
             Debug.Log(near.table[0].id); 
 
@@ -117,9 +124,7 @@ public class PositionController : MonoBehaviour
             DBUser aux = near.table[index]; 
 
             victim.ID = aux.id; 
-            victim.position = new Vector2(aux.latitude, aux.longitude); */
-            victim.position = new Vector2(41.389449f, 2.1131448f);
-            victim.position *= Mathf.Deg2Rad;
+            victim.position = new Vector2(aux.latitude, aux.longitude); 
             drawPoint(victim);
         }
 
@@ -134,7 +139,8 @@ public class PositionController : MonoBehaviour
         // Check if user has location service enabled
         if (!Input.location.isEnabledByUser)
         {
-            GameController.instance.DisplayMessageBox("Please turn on location service", () => { Application.Quit(); });
+            GameController.instance.DisplayMessageBox(  "Please turn on location service", 
+                                                        () => { Application.Quit(); });
             yield break;
         }
 
@@ -154,14 +160,16 @@ public class PositionController : MonoBehaviour
         // Service didn't initalizate in 20 seconds
         if (maxWait < 1)
         {
-            GameController.instance.DisplayMessageBox("Initialization timed out", () => { Application.Quit(); });
+            GameController.instance.DisplayMessageBox(  "Initialization timed out", 
+                                                        () => { Application.Quit(); });
             yield break;
         }
 
         // Connection has failed
         if (Input.location.status == LocationServiceStatus.Failed)
         {
-            GameController.instance.DisplayMessageBox("Unable to determine device location", () => { Application.Quit(); });
+            GameController.instance.DisplayMessageBox("Unable to determine device location",
+                                                      () => { Application.Quit(); });
             yield break;
         }
 
@@ -176,8 +184,10 @@ public class PositionController : MonoBehaviour
     // lat and lon in radians
     public float earthRadius(float lat, float lon)
     {
+        // Numerator
         float num = (equR4 * Mathf.Cos(lat) * Mathf.Cos(lat)) +
                     (polR4 * Mathf.Sin(lat) * Mathf.Sin(lat));
+        // Denominator
         float den = (equR2 * Mathf.Cos(lat) * Mathf.Cos(lat)) +
                     (polR2 * Mathf.Sin(lat) * Mathf.Sin(lat));
 
@@ -192,7 +202,9 @@ public class PositionController : MonoBehaviour
     public Vector3 getCartesian(float lat, float lon)
     {
         float r = earthRadius(lat, lon);
-        return new Vector3(r * Mathf.Cos(lat) * Mathf.Cos(lon), r * Mathf.Cos(lat) * Mathf.Sin(lon), r * Mathf.Sin(lat));
+        return new Vector3(r * Mathf.Cos(lat) * Mathf.Cos(lon),
+                            r * Mathf.Cos(lat) * Mathf.Sin(lon),
+                            r * Mathf.Sin(lat));
     }
 
     public Vector3 getCartesian2D(Vector2 victimPos)
@@ -200,27 +212,37 @@ public class PositionController : MonoBehaviour
         Vector3 origin = getCartesian(playerPosition);
         Vector3 dest = getCartesian(victimPos);
         Vector3 diff = dest - origin;
+        Vector3 nord = getCartesian(Mathf.PI / 2, 0);
+        Vector3 N0 = nord - origin;
+        N0.Normalize();
         origin.Normalize();
 
-        return Vector3.ProjectOnPlane(diff, origin);
+        Vector3 E = Vector3.Cross(N0, origin);
+        E.Normalize();
+        Vector3 N = Vector3.Cross(origin, E);
+        N.Normalize();
+
+        return new Vector3(Vector3.Dot(diff, E), Vector3.Dot(diff, N), 0);
     }
 
     void drawPoint(PlayerPoint vict)
     {
         Vector3 pos = getCartesian2D(vict.position);
-        pos.z = 0;
         vict.cartesianPosition = pos;
+        Debug.Log("Pos: " + pos);
+        pos *= scaleFactor;
+        Debug.Log("Pos2: " + pos);
 
-        Debug.Log(pos);
-        victim.pointObject = Instantiate(userPoint, pos, Quaternion.identity) as GameObject;
+        victim.pointObject = Instantiate(userPoint, pos, Quaternion.Euler(90f, 0, 0)) as GameObject;
     }
 
     void changePoint(PlayerPoint vict)
     {
         Vector3 pos = getCartesian2D(vict.position);
-        pos.z = 0;
+        vict.cartesianPosition = pos;
+        pos *= scaleFactor;
 
-        Debug.Log(pos);
+        Debug.Log("Pos: " + pos);
         victim.pointObject.transform.position = pos;
     }
 }

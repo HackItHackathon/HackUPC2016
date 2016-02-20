@@ -35,7 +35,6 @@ public class UserPointFader : MonoBehaviour
     private IEnumerator fadeOut()
     {
         var t = 0f;
-        Debug.Log("Coroutine");
         Color color = meshR.material.color;
         color.a = 1f;
         meshR.material.color = color;
@@ -43,7 +42,6 @@ public class UserPointFader : MonoBehaviour
         while (t < fadeOutTime + .5)
         {
             color.a = Mathf.Lerp(1f, 0f, t / fadeOutTime);
-            Debug.Log(color.a);
             meshR.material.color = color;
             t += pas;
 
