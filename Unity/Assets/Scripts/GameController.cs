@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     public static GameController instance;
     public Canvas canvas;
     public GameObject messageBox;
+    public int ID;
 
     private PositionController positionController;
     private static string codeElements = "";
