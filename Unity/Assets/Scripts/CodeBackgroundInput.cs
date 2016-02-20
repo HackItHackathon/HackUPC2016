@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene controller
+public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene controller!
     
     public GameObject codeImage;
     public const float TIME = 15; // time that the player has to answer
+    public Text infoText;
 
     private GameObject[] codeImages;
     private int count = 0;
@@ -85,6 +87,7 @@ public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene
         else
         {
             Debug.Log("NOPE, you lose");
+            infoText.text = "Nope, keep trying";
         }
     }
 }

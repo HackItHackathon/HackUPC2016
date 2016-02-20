@@ -7,6 +7,11 @@ public class Menu : MonoBehaviour {
     public Canvas quitmenu;
     public Button spy;
     public Button exit;
+    public Button stats;
+    public Button defend;
+    public Button influence;
+    public Button shop;
+    public Button ranking;
 	// Use this for initialization
 	void Start () {
         //quitmenu = quitmenu.GetComponent<Canvas> ();
@@ -19,6 +24,12 @@ public class Menu : MonoBehaviour {
         quitmenu.enabled = true;
         spy.enabled = false;
         exit.enabled = false;
+        stats.enabled = false;
+        defend.enabled = false;
+        influence.enabled = false;
+        shop.enabled = false;
+        ranking.enabled = false;
+
     }
 
     public void NoPress()
@@ -26,6 +37,11 @@ public class Menu : MonoBehaviour {
         quitmenu.enabled = false;
         spy.enabled = true;
         exit.enabled = true;
+        stats.enabled = true;
+        defend.enabled = true;
+        influence.enabled = true;
+        shop.enabled = true;
+        ranking.enabled = true;
     }
 	
     public void ExitGame()
@@ -40,7 +56,7 @@ public class Menu : MonoBehaviour {
 
     public void LoadScene(string level)
     {
-        GameController.instance.scenesStack.Push(level);
+        //GameController.instance.scenesStack.Push(level);
         SceneManager.LoadScene(level);
     }
 }
