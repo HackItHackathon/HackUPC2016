@@ -30,6 +30,8 @@ public class Login : MonoBehaviour {
         JsonUtility.FromJsonOverwrite(web.text, myObject);
         Debug.Log(myObject.id);
         GameController.instance.ID = myObject.id;
+        Application.LoadLevel(1);
+
     }
-	
+
 }
