@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class CodeBackgroundInput : MonoBehaviour {
+public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene controller
     
     public GameObject codeImage;
+    public const float TIME = 5; // time that the player has to answer
 
     private GameObject[] codeImages;
     private int count = 0;
@@ -30,8 +32,14 @@ public class CodeBackgroundInput : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        float timeToEnd = TIME - Time.timeSinceLevelLoad;
+        //Debug.Log(timeToEnd);
+        if (timeToEnd <= 0)
+        {
+            // finish
+            GameController.instance.IncrementGame();
+        }
+    }
 
     public void AddElement(int id)
     {
@@ -57,8 +65,7 @@ public class CodeBackgroundInput : MonoBehaviour {
         string input = "";
         for(int i = 0; i < 4; ++i)
             input = input + codeImages[i].GetComponent<CodeImage>().GetSprite() + " ";
-        Debug.Log("Solution: " + solution);
-        Debug.Log("Input: " + input);
+        Debug.Log("Solution: " + solution + " | Input: " + input);
         return solution.Equals(input);
     }
 
@@ -66,7 +73,8 @@ public class CodeBackgroundInput : MonoBehaviour {
     {
         if(count == 4 && CodeIsCorrect())
         {
-            Debug.Log("CONGRATULATIONS");
+            Debug.Log("CONGRATULATIONS"); // TODO: message box
+            GameController.instance.IncrementGame();
         }
         else
         {
