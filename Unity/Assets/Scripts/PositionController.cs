@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PositionController : MonoBehaviour
@@ -8,7 +9,7 @@ public class PositionController : MonoBehaviour
         public long ID;
         public GameObject pointObject;
 
-        public PlayerPoint(long ID = -1, GameObject pointObject  = null)
+        public PlayerPoint(long ID = -1, GameObject pointObject = null)
         {
             this.ID = ID;
             this.pointObject = pointObject;
@@ -18,6 +19,8 @@ public class PositionController : MonoBehaviour
     public Vector2[] positions = { new Vector2(2f, 3f), new Vector2(-1f, 4f) };
     public Vector2 playerPosition;
     public GameObject userPoint;
+
+    public Text coordinates;
 
     public static float equR = 6.3844e6f;  // Equatorial radius
     public static float polR = 6.3528e6f;  // Polar radius
@@ -36,16 +39,30 @@ public class PositionController : MonoBehaviour
         equR4 = equR2 * equR2;
         polR4 = polR2 * polR2;
 
+        coordinates.text = "";
         StartCoroutine(locationServiceStart());
+    }
+
+    void Update()
+    { 
+        if (Input.location.status == LocationServiceStatus.Running)
+        {
+            playerPosition.x = Input.location.lastData.latitude;
+            playerPosition.y = Input.location.lastData.longitude;
+
+            coordinates.text = "Lat: " + playerPosition.x + " Lon: " + playerPosition.y;
+        }
     }
 
     IEnumerator locationServiceStart()
     {
+        Input.location.Start();
+
         // Check if user has location service enabled
         if (!Input.location.isEnabledByUser)
         {
-            GameController.instance.DisplayMessageBox("Please turn on location service", 
-                () => 
+            GameController.instance.DisplayMessageBox("Please turn on location service",
+                () =>
                 {
 #if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;
@@ -62,7 +79,7 @@ public class PositionController : MonoBehaviour
         // Wait until service initializates
         int maxWait = 20;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
-        { 
+        {
             yield return new WaitForSeconds(1);
             --maxWait;
         }

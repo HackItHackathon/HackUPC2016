@@ -272,7 +272,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 5}
-  m_SizeDelta: {x: 100, y: 50}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &509392340
 MonoBehaviour:
@@ -575,24 +575,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2a657a95538bb941b2e528540c24848, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1715121007 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 113632, guid: c2a657a95538bb941b2e528540c24848, type: 2}
-  m_PrefabInternal: {fileID: 1497972883}
---- !u!114 &1715121008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1715121007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5150a2c9f33fa094c8d8ee6d376046f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positionController: {fileID: 0}
-  canvas: {fileID: 168818692}
-  messageBox: {fileID: 161304, guid: 892de48cb66b9634d87250f540e37090, type: 2}
 --- !u!20 &1715121011 stripped
 Camera:
   m_PrefabParentObject: {fileID: 2031266, guid: c2a657a95538bb941b2e528540c24848,
@@ -810,11 +792,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 168818693}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1883555402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,7 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.10980392, g: 1, b: 0.12941177, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -841,7 +823,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -863,6 +845,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1959229976}
   - 114: {fileID: 1959229975}
+  - 114: {fileID: 1959229977}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: SceneController
@@ -886,6 +869,7 @@ MonoBehaviour:
   - {x: -1, y: 4}
   playerPosition: {x: 0, y: 0}
   userPoint: {fileID: 142504, guid: 93d5c707cc34bab4e8297ce353116fc7, type: 2}
+  coordinates: {fileID: 1883555402}
 --- !u!4 &1959229976
 Transform:
   m_ObjectHideFlags: 0
@@ -898,3 +882,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1959229977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1959229974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5150a2c9f33fa094c8d8ee6d376046f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 168818692}
+  messageBox: {fileID: 161304, guid: 892de48cb66b9634d87250f540e37090, type: 2}
