@@ -29,8 +29,9 @@ public class SceneController : MonoBehaviour {
         solution = "";
         for(int i = 0; i < 4; ++i)
         {
-            solution = solution + codeImages[i].GetComponent<CodeImage>().GetSprite();
+            solution = solution + codeImages[i].GetComponent<CodeImage>().GetSprite() + " ";
         }
+        Debug.Log(solution);
     }
 
     void Update()
