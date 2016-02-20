@@ -1,25 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class login : MonoBehaviour {
+public class Login : MonoBehaviour {
 
+    public Text userName;
 
 	// Use this for initialization
 	void Awake () {
-	    if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
 
     }
 
-    public static void onClick()
+    public void onClick()
     {
+        Debug.Log(userName.text);
 
     }
 	
