@@ -1,7 +1,7 @@
 <?php
 
 
-$arr = array('id' => 1);
+$arr = array('id' => array(1,2,3));
 
 echo json_encode($arr);
 

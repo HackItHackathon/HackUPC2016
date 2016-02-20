@@ -1,7 +1,7 @@
 <?php
 
 
-$arr = array('id' => 1);
+$arr = array('punt' => 100);
 
 echo json_encode($arr);
 
