@@ -31,7 +31,7 @@ public class SceneController : MonoBehaviour {
         {
             // finish
             //Debug.Log(GameController.getCodeElements());
-            //SceneManager.LoadScene();            
+            SceneManager.LoadScene(1);            
         }
         else
         {
