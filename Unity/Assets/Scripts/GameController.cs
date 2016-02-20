@@ -35,16 +35,15 @@ public class GameController : MonoBehaviour {
         positionController = GetComponent<PositionController>();
     }
 
-    public static void setCodeElement(string id)
+    /*public static void setCodeElement(string id)
     {
         codeElements += id;
-        //Debug.Log(codeElements);
-    }
+    }*/
 
-    public static string getCodeElements()
+    /*public static string getCodeElements()
     {
         return codeElements;
-    }
+    }*/
 	
     public void DisplayMessageBox(string text, UnityAction a)
     {

@@ -14,7 +14,7 @@ public class CodeImage : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         Sprite rand = sprites[UnityEngine.Random.Range(0, sprites.Length)];
         spriteRenderer.sprite = rand;
-        GameController.setCodeElement(rand.ToString());
+        //GameController.setCodeElement(rand.ToString());
 
         if (SceneManager.GetActiveScene().name.Equals("Minigame_1_input")) {
             GameObject go = GameObject.FindGameObjectWithTag("CodeBackgroundInput");
