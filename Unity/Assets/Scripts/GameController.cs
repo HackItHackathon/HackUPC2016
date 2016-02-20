@@ -7,13 +7,14 @@ public class GameController : MonoBehaviour {
 
     [HideInInspector]
     public static GameController instance;
+    [HideInInspector]
+    public string solution;
     public Canvas canvas;
     public GameObject messageBox;
     public int ID;
 
     private PositionController positionController;
     private static string codeElements = "";
-    private string solution;
     private int gamenumber = 0;
 
 	// Use this for initialization
@@ -34,16 +35,6 @@ public class GameController : MonoBehaviour {
         Debug.Log("Game Started");
         positionController = GetComponent<PositionController>();
     }
-
-    /*public static void setCodeElement(string id)
-    {
-        codeElements += id;
-    }*/
-
-    /*public static string getCodeElements()
-    {
-        return codeElements;
-    }*/
 	
     public void DisplayMessageBox(string text, UnityAction a)
     {
