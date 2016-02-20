@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Menu : MonoBehaviour {
@@ -37,8 +38,9 @@ public class Menu : MonoBehaviour {
 	
 	}
 
-    public void LoadScene(int level)
+    public void LoadScene(string level)
     {
-        Application.LoadLevel(level);
+        GameController.instance.scenesStack.Push(level);
+        SceneManager.LoadScene(level);
     }
 }

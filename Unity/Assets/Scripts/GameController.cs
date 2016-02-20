@@ -4,7 +4,8 @@ using UnityEngine.Events;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     [HideInInspector]
     public static GameController instance;
@@ -13,6 +14,7 @@ public class GameController : MonoBehaviour {
     public Canvas canvas;
     public GameObject messageBox;
     public int ID;
+    public Stack scenesStack = new Stack();
 
     public float puntuation = 0;
 
@@ -20,9 +22,10 @@ public class GameController : MonoBehaviour {
     //private static string codeElements = "";
     private int gamenumber = 0;
 
-	// Use this for initialization
-	void Awake () {
-	    if (instance == null)
+    // Use this for initialization
+    void Awake()
+    {
+        if (instance == null)
         {
             instance = this;
         }
@@ -31,14 +34,14 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-	}
+    }
 
     void Start()
     {
         Debug.Log("Game Started");
         positionController = GetComponent<PositionController>();
     }
-	
+
     public void DisplayMessageBox(string text, UnityAction a)
     {
         GameObject message = Instantiate(messageBox);
@@ -65,7 +68,7 @@ public class GameController : MonoBehaviour {
     {
         ++gamenumber;
         Debug.Log(gamenumber);
-        if(gamenumber >= 3)
+        if (gamenumber >= 3)
         {
             // The end
             Debug.Log("This is the end. Puntuation: " + puntuation);
@@ -75,5 +78,10 @@ public class GameController : MonoBehaviour {
             Destroy(obj);
             SceneManager.LoadScene("Minigame_1");
         }
+    }
+
+    public void LateUpdate()
+    {
+        
     }
 }
