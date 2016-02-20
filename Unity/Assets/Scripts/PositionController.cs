@@ -15,6 +15,7 @@ public class PositionController : MonoBehaviour
     public Vector2[] positions = { new Vector2(2f, 3f), new Vector2(-1f, 4f) };
     public Vector2 playerPosition;
     public GameObject userPoint;
+    public GameObject radarLines;
 
     public Text coordinates;
     public int timeOut = 30;
@@ -68,6 +69,7 @@ public class PositionController : MonoBehaviour
         //playerPosition.y = Mathf.Deg2Rad * Input.location.lastData.longitude;
 
         playerPosition = new Vector2(41.3892279f, 2.1133999f);
+        playerPosition *= Mathf.Deg2Rad;
 
         // Get User info
         //string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + GameController.instance.ID;
@@ -117,6 +119,7 @@ public class PositionController : MonoBehaviour
             victim.ID = aux.id; 
             victim.position = new Vector2(aux.latitude, aux.longitude); */
             victim.position = new Vector2(41.389449f, 2.1131448f);
+            victim.position *= Mathf.Deg2Rad;
             drawPoint(victim);
         }
 
@@ -181,23 +184,23 @@ public class PositionController : MonoBehaviour
         return Mathf.Sqrt(num / den);
     }
 
-    public Vector3 getPolar(Vector2 vec)
+    public Vector3 getCartesian(Vector2 vec)
     {
-        return getPolar(vec.x, vec.y);
+        return getCartesian(vec.x, vec.y);
     }
 
-    public Vector3 getPolar(float lat, float lon)
+    public Vector3 getCartesian(float lat, float lon)
     {
         float r = earthRadius(lat, lon);
-        return new Vector3(r * Mathf.Sin(lat) * Mathf.Cos(lon), r * Mathf.Sin(lat) * Mathf.Sin(lon), r * Mathf.Cos(lat));
+        return new Vector3(r * Mathf.Cos(lat) * Mathf.Cos(lon), r * Mathf.Cos(lat) * Mathf.Sin(lon), r * Mathf.Sin(lat));
     }
 
     public Vector3 getCartesian2D(Vector2 victimPos)
     {
-        Vector3 origin = getPolar(playerPosition);
-        Vector3 dest = getPolar(victimPos);
+        Vector3 origin = getCartesian(playerPosition);
+        Vector3 dest = getCartesian(victimPos);
         Vector3 diff = dest - origin;
-        diff.Normalize();
+        origin.Normalize();
 
         return Vector3.ProjectOnPlane(diff, origin);
     }
@@ -206,6 +209,7 @@ public class PositionController : MonoBehaviour
     {
         Vector3 pos = getCartesian2D(vict.position);
         pos.z = 0;
+        vict.cartesianPosition = pos;
 
         Debug.Log(pos);
         victim.pointObject = Instantiate(userPoint, pos, Quaternion.identity) as GameObject;

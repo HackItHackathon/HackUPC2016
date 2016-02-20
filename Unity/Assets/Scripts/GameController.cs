@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour
 
     public float puntuation = 0;
 
-    private PositionController positionController;
     //private static string codeElements = "";
     private int gamenumber = 0;
 
@@ -39,7 +38,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Debug.Log("Game Started");
-        positionController = GetComponent<PositionController>();
     }
 
     public void DisplayMessageBox(string text, UnityAction a)
