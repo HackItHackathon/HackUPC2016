@@ -32,6 +32,7 @@ public class SceneController : MonoBehaviour {
             solution = solution + codeImages[i].GetComponent<CodeImage>().GetSprite() + " ";
         }
         Debug.Log(solution);
+        GameController.instance.SetSolution(solution);
     }
 
     void Update()

@@ -52,11 +52,25 @@ public class CodeBackgroundInput : MonoBehaviour {
         }
     }
 
+    public bool CodeIsCorrect()
+    {
+        string solution = GameController.instance.GetSolution();
+        string input = "";
+        for(int i = 0; i < 4; ++i)
+            input = input + codeImages[i].GetComponent<CodeImage>().GetSprite() + " ";
+        return string.Compare(solution, input) == 1;
+    }
+
     public void Accept()
     {
-        //if(count == 4 && CodeIsCorrect())
+        Debug.Log("PRESSED");
+        if(count == 4 && CodeIsCorrect())
         {
-
+            Debug.Log("CONGRATULATIONS");
+        }
+        else
+        {
+            Debug.Log("NOPE, you lose");
         }
     }
 }
