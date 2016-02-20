@@ -62,14 +62,27 @@ while($row = $result->fetch_assoc()) {
 	$userf = new user();
 	$userf->id = $row['id'];
 	$userf->nom = $row['nom'];
-	$userf->latitude = $row['latitude'];
-	$userf->longitude = $row['longitude'];
-	$userf->punt = $row['punt'];
-	$userf->distance = calcdistance($user->latitude, $user->longitude, $userf->latitude, $userf-> longitude);
-	array_push($arrayusers, $userf);
+	if(abs($row['latitude'])<3.5 and abs($row['longitude'])<3.5){
+		$userf->latitude = $row['latitude'];
+		$userf->longitude = $row['longitude'];
+		$userf->punt = $row['punt'];
+		$userf->distance = calcdistance($user->latitude, $user->longitude, $userf->latitude, $userf-> longitude);
+		array_push($arrayusers, $userf);
+	}
 }
 asort($arrayusers);
 
-echo json_encode($arrayusers);
+$num = 1;
+$distance = 500000;
+if(isset($_GET['num'])) $num = $_GET['num'];
+if(isset($_GET['distance'])) $distance = $_GET['distance'];
+
+$i = 0;
+$arrayaux = array();
+while($i<sizeof($arrayusers) && $i<$num && $arrayusers[$i]->distance <= $distance ){
+	array_push($arrayaux, $arrayusers[$i]);
+	$i= $i +1;
+}
+echo json_encode($arrayaux);
 
 ?>
