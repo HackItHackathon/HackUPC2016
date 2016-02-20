@@ -48,7 +48,6 @@ public class CodeBackgroundInput : MonoBehaviour {
         {
             Destroy(codeImages[count-1]);
             --count;
-            Debug.Log("Now we are at " + count);
         }
     }
 
@@ -58,12 +57,13 @@ public class CodeBackgroundInput : MonoBehaviour {
         string input = "";
         for(int i = 0; i < 4; ++i)
             input = input + codeImages[i].GetComponent<CodeImage>().GetSprite() + " ";
-        return string.Compare(solution, input) == 1;
+        Debug.Log("Solution: " + solution);
+        Debug.Log("Input: " + input);
+        return solution.Equals(input);
     }
 
     public void Accept()
     {
-        Debug.Log("PRESSED");
         if(count == 4 && CodeIsCorrect())
         {
             Debug.Log("CONGRATULATIONS");

@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     private PositionController positionController;
     private static string codeElements = "";
     private string solution;
+    private int gamenumber = 0;
 
 	// Use this for initialization
 	void Awake () {
@@ -64,7 +65,6 @@ public class GameController : MonoBehaviour {
 
     public string GetSolution()
     {
-        Debug.Log("Get " + solution);
         return solution;
     }
 }
