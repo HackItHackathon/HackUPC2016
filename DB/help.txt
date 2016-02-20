@@ -1,3 +1,4 @@
 La url a la que heu de fer la petició és:
 http://interact.siliconpeople.net/hackathon/<nomfuncio>(?<nomparametre>=valor)^n
-els retorn surten ordenats a cada linia
+els retorn son en format json
+tot minuscules
