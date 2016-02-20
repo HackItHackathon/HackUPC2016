@@ -47,6 +47,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8ab341c9d83f72d47b0e842cadcef96c, type: 3}
   - {fileID: 21300000, guid: 501e51b3dbc8a3e418be3b79fcd9b76c, type: 3}
   - {fileID: 21300000, guid: abddf394e2a8bba4684f74871925c175, type: 3}
+  - {fileID: 21300000, guid: 98dc09e79750a7e44a4323c42a13f6b4, type: 3}
+  - {fileID: 21300000, guid: f12cfdd5acfb2ee4c98407abad2cca25, type: 3}
+  - {fileID: 21300000, guid: f30feb930d373574f947a740dc2851aa, type: 3}
+  - {fileID: 21300000, guid: bce86b25a9797c1418e2d9bea6729eaf, type: 3}
+  - {fileID: 21300000, guid: 0e9850219617e944d91ddf50c14e0d25, type: 3}
+  - {fileID: 21300000, guid: 81ebad13c5ff4f0428405da9d4de206c, type: 3}
+  - {fileID: 21300000, guid: ebf1682c880806c4093ed424c78345ae, type: 3}
+  - {fileID: 21300000, guid: 73e7afd1f511aac4b8f112fd801346fd, type: 3}
+  - {fileID: 21300000, guid: ecdfb939aa41b3d44bd8ff8f08cfadd6, type: 3}
+  - {fileID: 21300000, guid: 04ed8952545de8b4581347ca8c507cb2, type: 3}
+  - {fileID: 21300000, guid: dc4ed5291c9ab594b84071a2cb9a376e, type: 3}
 --- !u!212 &21230958
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -90,7 +101,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: sprites.Array.size
-      value: 6
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x

@@ -1,6 +1,6 @@
 <?php
 
-//http://interact.siliconpeople.net/hackathon/incpunt?id=9&punt=-20
+//http://interact.siliconpeople.net/hackathon/setlocation?id=9&latitude=23&longitude=2.332;
 
 $servername = "localhost";
 $username = "hackathon";
@@ -15,9 +15,11 @@ if ($conn->connect_error) {
 }
 //echo "Connected successfully";
 
-$sql = "UPDATE users SET punt=punt + '". $_GET['punt'] ."' WHERE id = '". $_GET['id'] ."'";
+$sql = "UPDATE users SET latitude='" . $_GET['latitude'] . "', longitude ='" . $_GET['longitude'].
+	"' WHERE id = '". $_GET['id'] ."'";
 
 echo $sql;
 
 $result = $conn->query($sql);
+
 ?>
