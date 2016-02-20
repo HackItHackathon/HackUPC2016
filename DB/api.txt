@@ -10,7 +10,7 @@
 +----------------+--------------------------------------------------------+--------------------------+-------------------------------------------------------------+
 | setlocation    | Es fa servir per actualitzar la possició del usuari    | ID, localització         | -                                                           |
 +----------------+--------------------------------------------------------+--------------------------+-------------------------------------------------------------+
-| registerattack | Es registre un attack d'un jugador a un altre          | ID1, ID2                 | -                                                           |
+| registerattack | Es registre un attack d'un jugador a un altre          | id, ida                  | -                                                           |
 |                |                                                        | ID1 ataca ID2            |                                                             |
 +----------------+--------------------------------------------------------+--------------------------+-------------------------------------------------------------+
 | getidnear      |                                                        | ID, (distance), (number) | Retorna sempre un ID com a minim, dos parametres opcionals. |

@@ -1,6 +1,5 @@
 <?php
 
-//http://interact.siliconpeople.net/hackathon/incpunt?id=9&punt=-20
 
 $servername = "localhost";
 $username = "hackathon";
@@ -15,9 +14,10 @@ if ($conn->connect_error) {
 }
 //echo "Connected successfully";
 
-$sql = "UPDATE users SET punt=punt + '". $_GET['punt'] ."' WHERE id = '". $_GET['id'] ."'";
+$sql = "UPDATE users SET ida='0' WHERE id = '". $_GET['id'] ."'";
 
 echo $sql;
 
 $result = $conn->query($sql);
+
 ?>
