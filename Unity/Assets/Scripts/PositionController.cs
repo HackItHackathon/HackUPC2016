@@ -19,14 +19,14 @@ public class PositionController : MonoBehaviour
     public Vector2 playerPosition;
     public GameObject userPoint;
 
-    private PlayerPoint player;
+    public static float equR = 6.3844e6f;  // Equatorial radius
+    public static float polR = 6.3528e6f;  // Polar radius
+    public static float equR2;             // Equatorial radius square
+    public static float polR2;             // Polar radius square
+    public static float equR4;             // Equatorial radius pow 4
+    public static float polR4;             // Polar radius pow 4
 
-    public float equR = 6.3844e6f;   // Equatorial radius
-    public float polR = 6.3528e6f;  // Polar radius
-    public float equR2;             // Equatorial radius square
-    public float polR2;             // Polar radius square
-    public float equR4;             // Equatorial radius pow 4
-    public float polR4;             // Polar radius pow 4
+    private PlayerPoint player;
 
     // Use this for initialization
     void Start()
@@ -36,14 +36,17 @@ public class PositionController : MonoBehaviour
         equR4 = equR2 * equR2;
         polR4 = polR2 * polR2;
 
-        int ID = -1;
-        Instantiate(userPoint, new Vector3(positions[0].x, positions[0].y, 0), Quaternion.Euler(new Vector3(90f, 0f, 0f)));
+        StartCoroutine(locationServiceStart());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator locationServiceStart()
     {
+        // Check if user has location service enabled
+        if (!Input.location.isEnabledByUser)
+        {
+        }
 
+        yield return true;
     }
 
     public float earthRadius(float lat, float lon)

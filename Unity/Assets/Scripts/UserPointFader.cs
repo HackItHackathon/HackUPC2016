@@ -30,7 +30,6 @@ public class UserPointFader : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
         StartCoroutine(fadeOut());
-        //Debug.Log("prova");
     }
 
     private IEnumerator fadeOut()

@@ -3,7 +3,9 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
+    [HideInInspector]
     public static GameController instance;
+    public PositionController positionController;
 
 	// Use this for initialization
 	void Awake () {
@@ -16,6 +18,8 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+
+        positionController = new PositionController();
 	}
 	
 }
