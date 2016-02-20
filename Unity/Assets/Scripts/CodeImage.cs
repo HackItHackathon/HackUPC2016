@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class CodeImage : MonoBehaviour {
 
@@ -15,8 +16,10 @@ public class CodeImage : MonoBehaviour {
         spriteRenderer.sprite = rand;
         GameController.setCodeElement(rand.ToString());
 
-        GameObject go = GameObject.FindGameObjectWithTag("CodeBackgroundInput");
-        codeBackgroundInput = go.GetComponent<CodeBackgroundInput>();
+        if (SceneManager.GetActiveScene().name.Equals("Minigame_1_input")) {
+            GameObject go = GameObject.FindGameObjectWithTag("CodeBackgroundInput");
+            codeBackgroundInput = go.GetComponent<CodeBackgroundInput>();
+        }
 	}
 	
 	// Update is called once per frame
@@ -37,8 +40,11 @@ public class CodeImage : MonoBehaviour {
     void OnMouseDown()
     {
         // this object was clicked - do something
-        string spr = spriteRenderer.sprite.name;
-        codeBackgroundInput.AddElement(Int32.Parse(spr) - 1);
+        if (SceneManager.GetActiveScene().name.Equals("Minigame_1_input"))
+        {
+            string spr = spriteRenderer.sprite.name;
+            codeBackgroundInput.AddElement(Int32.Parse(spr) - 1);
+        }
     }
 
 }

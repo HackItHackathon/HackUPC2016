@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
 
     private PositionController positionController;
     private static string codeElements = "";
+    private string solution;
 
 	// Use this for initialization
 	void Awake () {
@@ -54,5 +55,16 @@ public class GameController : MonoBehaviour {
         but.onClick.AddListener(a);
         // Insert into the canvas
         message.transform.SetParent(canvas.transform, false);
+    }
+
+    public void SetSolution(string sol)
+    {
+        solution = sol;
+    }
+
+    public string GetSolution()
+    {
+        Debug.Log("Get " + solution);
+        return solution;
     }
 }
