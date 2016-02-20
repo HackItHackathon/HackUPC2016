@@ -1,0 +1,52 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class CodeBackgroundInput : MonoBehaviour {
+    
+    public GameObject codeImage;
+
+    private GameObject[] codeImages;
+    private int count = 0;
+    private MeshRenderer meshRenderer;
+    private float height;
+    private float [] x_values;
+
+    // Use this for initialization
+    void Start () {
+        meshRenderer = GetComponent<MeshRenderer>();
+        Bounds bounds = meshRenderer.bounds;
+        Vector3 limits = bounds.size;
+
+        float xDelta = limits.x / 4;
+        height = transform.position.y;
+        x_values = new float[4];
+        x_values[0] = -1.5f * xDelta;
+        x_values[1] = -0.5f * xDelta;
+        x_values[2] = 0.5f * xDelta;
+        x_values[3] = 1.5f * xDelta;
+
+        codeImages = new GameObject[4];
+    }
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+    public void AddElement(int id)
+    {
+        if (count < 4) {
+            codeImages[count] = Instantiate(codeImage, new Vector3(x_values[count], height, 0), Quaternion.identity) as GameObject;
+            codeImages[count].GetComponent<CodeImage>().AssignSprite(id);
+            ++count;
+        }
+    }
+    public void RemoveElement()
+    {
+        if(count > 0)
+        {
+            //codeImages[count].GetComponent<CodeImage>().D
+            --count;
+        }
+    }
+}

@@ -260,14 +260,10 @@ Prefab:
       propertyPath: m_Name
       value: Code Background Input
       objectReference: {fileID: 0}
-    - target: {fileID: 496044, guid: 7238af211b4d52a4382d0bd4ca7f0e55, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 9.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 496044, guid: 7238af211b4d52a4382d0bd4ca7f0e55, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 2.95
-      objectReference: {fileID: 0}
+    - target: {fileID: 11447636, guid: 7238af211b4d52a4382d0bd4ca7f0e55, type: 2}
+      propertyPath: codeImage
+      value: 
+      objectReference: {fileID: 150940, guid: 0a16dbb3b03abb04d9b8dc70872226ba, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7238af211b4d52a4382d0bd4ca7f0e55, type: 2}
   m_IsPrefabParent: 0

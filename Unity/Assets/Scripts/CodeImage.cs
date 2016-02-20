@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
 
 public class CodeImage : MonoBehaviour {
 
     public Sprite[] sprites;
 
-    private SpriteRenderer sprite;
+    private CodeBackgroundInput codeBackgroundInput;
+    private SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
 	void Awake () { // TODO: ferho nomes quan volem que sigui random...
-        sprite = GetComponent<SpriteRenderer>();
-        Sprite rand = sprites[Random.Range(0, sprites.Length)];
-        sprite.sprite = rand;
-        //Debug.Log(rand.ToString());
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        Sprite rand = sprites[UnityEngine.Random.Range(0, sprites.Length)];
+        spriteRenderer.sprite = rand;
         GameController.setCodeElement(rand.ToString());
+
+        GameObject go = GameObject.FindGameObjectWithTag("CodeBackgroundInput");
+        codeBackgroundInput = go.GetComponent<CodeBackgroundInput>();
 	}
 	
 	// Update is called once per frame
@@ -23,14 +26,14 @@ public class CodeImage : MonoBehaviour {
     public void AssignSprite(int id)
     {
         Sprite aux = sprites[id];
-        sprite.sprite = aux;
+        spriteRenderer.sprite = aux;
     }
 
     void OnMouseDown()
     {
         // this object was clicked - do something
-        //Destroy(this.gameObject);
-        Debug.Log("CLICKED " + sprite.sprite);
+        string spr = spriteRenderer.sprite.name;
+        codeBackgroundInput.AddElement(Int32.Parse(spr) - 1);
     }
 
 }
