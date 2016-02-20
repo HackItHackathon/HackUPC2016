@@ -29,6 +29,11 @@ public class CodeImage : MonoBehaviour {
         spriteRenderer.sprite = aux;
     }
 
+    public string GetSprite()
+    {
+        return spriteRenderer.sprite.name;
+    }
+
     void OnMouseDown()
     {
         // this object was clicked - do something

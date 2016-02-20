@@ -41,6 +41,7 @@ public class CodeBackgroundInput : MonoBehaviour {
             ++count;
         }
     }
+
     public void RemoveElement()
     {
         if(count > 0)
@@ -48,6 +49,14 @@ public class CodeBackgroundInput : MonoBehaviour {
             Destroy(codeImages[count-1]);
             --count;
             Debug.Log("Now we are at " + count);
+        }
+    }
+
+    public void Accept()
+    {
+        //if(count == 4 && CodeIsCorrect())
+        {
+
         }
     }
 }
