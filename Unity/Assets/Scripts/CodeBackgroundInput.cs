@@ -5,13 +5,14 @@ using System.Collections;
 public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene controller
     
     public GameObject codeImage;
-    public const float TIME = 2; // time that the player has to answer
+    public const float TIME = 15; // time that the player has to answer
 
     private GameObject[] codeImages;
     private int count = 0;
     private MeshRenderer meshRenderer;
     private float height;
     private float [] x_values;
+    private bool end = false;
 
     // Use this for initialization
     void Start () {
@@ -34,10 +35,12 @@ public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene
 	void Update () {
         float timeToEnd = TIME - Time.timeSinceLevelLoad;
         //Debug.Log(timeToEnd);
-        if (timeToEnd <= 0)
+        //Debug.Log(end);
+        if (timeToEnd <= 0 && !end)
         {
-            // finish
-            GameController.instance.IncrementGame();
+            end = true;
+            Debug.Log("Time is Over");
+            GameController.instance.IncrementGame(gameObject);
         }
     }
 
@@ -74,7 +77,10 @@ public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene
         if(count == 4 && CodeIsCorrect())
         {
             Debug.Log("CONGRATULATIONS"); // TODO: message box
-            GameController.instance.IncrementGame();
+            // increment the puntuation
+            float p = TIME - Time.timeSinceLevelLoad;
+            if (p > 0) GameController.instance.puntuation += p;
+            GameController.instance.IncrementGame(gameObject);
         }
         else
         {

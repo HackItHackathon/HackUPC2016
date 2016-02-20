@@ -16,8 +16,10 @@ public class GameController : MonoBehaviour
     public int ID;
     public Stack scenesStack = new Stack();
 
+    public float puntuation = 0;
+
     private PositionController positionController;
-    private static string codeElements = "";
+    //private static string codeElements = "";
     private int gamenumber = 0;
 
     // Use this for initialization
@@ -62,18 +64,18 @@ public class GameController : MonoBehaviour
         return solution;
     }
 
-    public void IncrementGame()
+    public void IncrementGame(GameObject obj)
     {
         ++gamenumber;
         Debug.Log(gamenumber);
         if (gamenumber >= 3)
         {
             // The end
-            Debug.Log("This is the end");
-            Application.Quit();
+            Debug.Log("This is the end. Puntuation: " + puntuation);
         }
         else
         {
+            Destroy(obj);
             SceneManager.LoadScene("Minigame_1");
         }
     }
