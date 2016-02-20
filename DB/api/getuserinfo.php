@@ -23,9 +23,8 @@ $result = $conn->query($sql);
 
 $row= $result->fetch_row();
 
-
-$arr = array('id' => $row[0], 'nom' => $row[1],'punt' => $row[5],
-		'location' => array('latitude' => $row[2], 'longitude' => $row[3]), 'ida' => $row[4]);
+$arr = array('id' => $row['id'], 'nom' => $row['nom'],'punt' => $row['punt'],
+		'location' => array('latitude' => $row['latitude'], 'longitude' => $row['longitude']), 'ida' => $row['ida']);
 
 echo json_encode($arr);
 

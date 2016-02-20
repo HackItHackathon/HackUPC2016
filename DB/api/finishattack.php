@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 //echo "Connected successfully";
 
-$sql = "UPDATE users SET ida='0' WHERE id = '". $_GET['id'] ."'";
+$sql = "UPDATE users SET ida='-1' WHERE id = '". $_GET['id'] ."'";
 
 echo $sql;
 
