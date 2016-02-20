@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
  
@@ -30,8 +31,7 @@ public class Login : MonoBehaviour {
         JsonUtility.FromJsonOverwrite(web.text, myObject);
         Debug.Log(myObject.id);
         GameController.instance.ID = myObject.id;
-        Application.LoadLevel(3);
-
+        SceneManager.LoadScene("menu");
     }
 
 }

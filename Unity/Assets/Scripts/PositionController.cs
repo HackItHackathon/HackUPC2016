@@ -66,6 +66,22 @@ public class PositionController : MonoBehaviour
         }
     }
 
+    IEnumerator locationRefresh()
+    {
+        string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + GameController.instance.ID;
+        WWW web = new WWW(url);
+        while (!web.isDone) ;
+        Getuserinfo user = new Getuserinfo();
+        JsonUtility.FromJsonOverwrite(web.text, user);
+        url = "http://interact.siliconpeople.net/hackathon/getnearid?id=" + GameController.instance.ID;
+        web = new WWW(url);
+        while (!web.isDone) ;
+        Getnearid near = new Getnearid();
+        JsonUtility.FromJsonOverwrite(web.text, near);
+        Debug.Log(near.table[0].id);
+        yield return new WaitForSeconds(5);
+    }
+
     IEnumerator locationServiceStart()
     {
         Input.location.Start();
