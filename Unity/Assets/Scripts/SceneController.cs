@@ -40,7 +40,6 @@ public class SceneController : MonoBehaviour {
         if(timeToEnd <= 0)
         {
             // finish
-            //Debug.Log(GameController.getCodeElements());
             SceneManager.LoadScene("Minigame_1_input");            
         }
         else
