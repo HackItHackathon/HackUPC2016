@@ -12,6 +12,8 @@ public class CodeImage : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
         Sprite rand = sprites[Random.Range(0, sprites.Length)];
         sprite.sprite = rand;
+        //Debug.Log(rand.ToString());
+        GameController.setCodeElement(rand.ToString());
 	}
 	
 	// Update is called once per frame

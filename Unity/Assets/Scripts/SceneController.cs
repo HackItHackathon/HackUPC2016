@@ -29,6 +29,7 @@ public class SceneController : MonoBehaviour {
         if(timeToEnd <= MIN_TIME)
         {
             // finish
+            //Debug.Log(GameController.getCodeElements());
         }
         else
         {
