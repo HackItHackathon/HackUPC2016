@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour {
 
     private PositionController positionController;
     private static string codeElements = "";
+    private string solution;
+    private int gamenumber = 0;
 
 	// Use this for initialization
 	void Awake () {
@@ -33,16 +35,15 @@ public class GameController : MonoBehaviour {
         positionController = GetComponent<PositionController>();
     }
 
-    public static void setCodeElement(string id)
+    /*public static void setCodeElement(string id)
     {
         codeElements += id;
-        //Debug.Log(codeElements);
-    }
+    }*/
 
-    public static string getCodeElements()
+    /*public static string getCodeElements()
     {
         return codeElements;
-    }
+    }*/
 	
     public void DisplayMessageBox(string text, UnityAction a)
     {
@@ -54,5 +55,15 @@ public class GameController : MonoBehaviour {
         but.onClick.AddListener(() => { Destroy(message); a(); });
         // Insert into the canvas
         message.transform.SetParent(canvas.transform, false);
+    }
+
+    public void SetSolution(string sol)
+    {
+        solution = sol;
+    }
+
+    public string GetSolution()
+    {
+        return solution;
     }
 }

@@ -314,6 +314,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 206433561}
   - 114: {fileID: 206433560}
+  - 114: {fileID: 206433562}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -329,7 +330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 206433559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22711c2c9a0cc949b82844366e4f86d, type: 3}
+  m_Script: {fileID: 11500000, guid: 804dcea2f906db84686ba0ec788bdf0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   userName: {fileID: 59427195}
@@ -345,6 +346,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &206433562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 206433559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5150a2c9f33fa094c8d8ee6d376046f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  messageBox: {fileID: 161304, guid: 892de48cb66b9634d87250f540e37090, type: 2}
+  ID: 0
 --- !u!1 &309965451
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +551,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 536540435}
   - 33: {fileID: 536540434}
-  - 64: {fileID: 536540433}
   - 23: {fileID: 536540432}
   m_Layer: 0
   m_Name: Quad
@@ -555,7 +569,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5316e1208f77f0f42a4026c872688b40, type: 2}
+  - {fileID: 2100000, guid: abade905edff6cd45b971e1e5638b016, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -571,18 +585,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!64 &536540433
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 536540431}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &536540434
 MeshFilter:
   m_ObjectHideFlags: 0

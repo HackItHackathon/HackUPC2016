@@ -48,15 +48,29 @@ public class CodeBackgroundInput : MonoBehaviour {
         {
             Destroy(codeImages[count-1]);
             --count;
-            Debug.Log("Now we are at " + count);
         }
+    }
+
+    public bool CodeIsCorrect()
+    {
+        string solution = GameController.instance.GetSolution();
+        string input = "";
+        for(int i = 0; i < 4; ++i)
+            input = input + codeImages[i].GetComponent<CodeImage>().GetSprite() + " ";
+        Debug.Log("Solution: " + solution);
+        Debug.Log("Input: " + input);
+        return solution.Equals(input);
     }
 
     public void Accept()
     {
-        //if(count == 4 && CodeIsCorrect())
+        if(count == 4 && CodeIsCorrect())
         {
-
+            Debug.Log("CONGRATULATIONS");
+        }
+        else
+        {
+            Debug.Log("NOPE, you lose");
         }
     }
 }
