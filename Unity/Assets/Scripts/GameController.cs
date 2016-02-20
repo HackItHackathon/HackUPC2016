@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour {
         Button but = message.GetComponentInChildren<Button>();
         // Set text and listener
         t.text = text;
-        but.onClick.AddListener(a);
+        but.onClick.AddListener(() => { Destroy(message); a(); });
         // Insert into the canvas
         message.transform.SetParent(canvas.transform, false);
     }
