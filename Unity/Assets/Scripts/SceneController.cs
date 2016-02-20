@@ -8,8 +8,8 @@ public class SceneController : MonoBehaviour {
     public Text timeText;
     public float height = 3;
 
-    public const float TIME = 2; // time that the player has to memorize
-    public const float MIN_TIME = 0.01f;
+    public const float TIME = 4; // time that the player has to memorize
+    public const float MIN_TIME = 0.001f;
 
 
     // Use this for initialization
@@ -29,6 +29,7 @@ public class SceneController : MonoBehaviour {
         if(timeToEnd <= MIN_TIME)
         {
             // finish
+            //Debug.Log(GameController.getCodeElements());
         }
         else
         {
