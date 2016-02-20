@@ -10,7 +10,6 @@ public class SceneController : MonoBehaviour {
     public float height = 3;
 
     public const float TIME = 4; // time that the player has to memorize
-    public const float MIN_TIME = 0.001f;
 
     private GameObject[] codeImages;
     private string solution;
@@ -38,7 +37,7 @@ public class SceneController : MonoBehaviour {
     void Update()
     {
         float timeToEnd = TIME - Time.timeSinceLevelLoad;
-        if(timeToEnd <= MIN_TIME)
+        if(timeToEnd <= 0)
         {
             // finish
             //Debug.Log(GameController.getCodeElements());

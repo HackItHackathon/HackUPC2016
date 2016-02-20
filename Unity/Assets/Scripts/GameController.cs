@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -56,5 +57,21 @@ public class GameController : MonoBehaviour {
     public string GetSolution()
     {
         return solution;
+    }
+
+    public void IncrementGame()
+    {
+        ++gamenumber;
+        Debug.Log(gamenumber);
+        if(gamenumber >= 3)
+        {
+            // The end
+            Debug.Log("This is the end");
+            Application.Quit();
+        }
+        else
+        {
+            SceneManager.LoadScene("Minigame_1");
+        }
     }
 }
