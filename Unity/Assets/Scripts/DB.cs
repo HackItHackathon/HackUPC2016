@@ -5,11 +5,11 @@
 
 public class DBUser
 {
-    public double distance;
+    public float distance;
 	public int id;
 	public string nom;
-	public double latitude;
-	public double longitude;
+	public float latitude;
+	public float longitude;
 	public int punt;
 }
 
@@ -23,8 +23,8 @@ public class Getuserinfo
     public int id;
     public int punt;
     public string nom;
-    public double latitude;
-    public double longitude;
+    public float latitude;
+    public float longitude;
     public int ida;
 }
 
