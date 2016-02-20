@@ -7,6 +7,7 @@ public class Menu : MonoBehaviour {
     public Canvas quitmenu;
     public Button spy;
     public Button exit;
+    public Button stats;
 	// Use this for initialization
 	void Start () {
         //quitmenu = quitmenu.GetComponent<Canvas> ();
@@ -19,6 +20,7 @@ public class Menu : MonoBehaviour {
         quitmenu.enabled = true;
         spy.enabled = false;
         exit.enabled = false;
+        stats.enabled = false;
     }
 
     public void NoPress()
@@ -26,6 +28,7 @@ public class Menu : MonoBehaviour {
         quitmenu.enabled = false;
         spy.enabled = true;
         exit.enabled = true;
+        stats.enabled = true;
     }
 	
     public void ExitGame()

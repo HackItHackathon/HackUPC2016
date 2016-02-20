@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/Minigame_1_input.unity
   - enabled: 1
     path: Assets/_Scenes/Radar.unity
+  - enabled: 1
+    path: Assets/_Scenes/Stats.unity
