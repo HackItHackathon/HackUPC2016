@@ -5,7 +5,7 @@ using System.Collections;
 public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene controller
     
     public GameObject codeImage;
-    public const float TIME = 5; // time that the player has to answer
+    public const float TIME = 2; // time that the player has to answer
 
     private GameObject[] codeImages;
     private int count = 0;
