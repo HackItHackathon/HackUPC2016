@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
@@ -6,6 +8,8 @@ public class GameController : MonoBehaviour {
     [HideInInspector]
     public static GameController instance;
     public PositionController positionController;
+    public Canvas canvas;
+    public GameObject messageBox;
 
     private static string codeElements = "";
 
@@ -20,8 +24,8 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-
-        positionController = new PositionController();
+        Debug.Log("Game Started");
+        positionController = gameObject.AddComponent<PositionController>();
 	}
 
     public static void setCodeElement(string id)
@@ -35,4 +39,15 @@ public class GameController : MonoBehaviour {
         return codeElements;
     }
 	
+    public void DisplayMessageBox(string text, UnityAction a)
+    {
+        GameObject message = Instantiate(messageBox);
+        Text t = message.GetComponentInChildren<Text>();
+        Button but = message.GetComponentInChildren<Button>();
+        // Set text and listener
+        t.text = text;
+        but.onClick.AddListener(a);
+        // Insert into the canvas
+        message.transform.SetParent(canvas.transform, false);
+    }
 }

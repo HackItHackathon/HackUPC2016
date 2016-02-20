@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
 
@@ -30,6 +31,7 @@ public class SceneController : MonoBehaviour {
         {
             // finish
             //Debug.Log(GameController.getCodeElements());
+            SceneManager.LoadScene(1);            
         }
         else
         {

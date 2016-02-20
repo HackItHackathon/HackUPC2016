@@ -44,6 +44,46 @@ public class PositionController : MonoBehaviour
         // Check if user has location service enabled
         if (!Input.location.isEnabledByUser)
         {
+            GameController.instance.DisplayMessageBox("Please turn on location service", 
+                () => 
+                {
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+#else
+                    Application.Quit();
+#endif
+                });
+            yield break;
+        }
+
+        // Start service before quering location
+        Input.location.Start();
+
+        // Wait until service initializates
+        int maxWait = 20;
+        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+        { 
+            yield return new WaitForSeconds(1);
+            --maxWait;
+        }
+
+        // Service didn't initalizate in 20 seconds
+        if (maxWait < 1)
+        {
+            GameController.instance.DisplayMessageBox("Initialization timed out", () => { Application.Quit(); });
+            yield break;
+        }
+
+        // Connection has failed
+        if (Input.location.status == LocationServiceStatus.Failed)
+        {
+            GameController.instance.DisplayMessageBox("Unable to determine device location", () => { Application.Quit(); });
+            yield break;
+        }
+        else
+        {
+            // Access granted and location available
+            Debug.Log("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude);
         }
 
         yield return true;

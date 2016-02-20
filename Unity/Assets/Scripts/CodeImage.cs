@@ -8,7 +8,7 @@ public class CodeImage : MonoBehaviour {
     private SpriteRenderer sprite;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () { // TODO: ferho nomes quan volem que sigui random...
         sprite = GetComponent<SpriteRenderer>();
         Sprite rand = sprites[Random.Range(0, sprites.Length)];
         sprite.sprite = rand;
@@ -17,7 +17,13 @@ public class CodeImage : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () {	
 	}
+
+    public void AssignSprite(int id)
+    {
+        Sprite aux = sprites[id];
+        sprite.sprite = aux;
+    }
+
 }
