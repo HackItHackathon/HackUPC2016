@@ -21,6 +21,7 @@ public class PositionController : MonoBehaviour
     public GameObject userPoint;
 
     public Text coordinates;
+    public int timeOut = 30;
 
     public static float equR = 6.3844e6f;  // Equatorial radius
     public static float polR = 6.3528e6f;  // Polar radius
@@ -44,19 +45,31 @@ public class PositionController : MonoBehaviour
     }
 
     void Update()
-    { 
+    {
         if (Input.location.status == LocationServiceStatus.Running)
         {
-            playerPosition.x = Input.location.lastData.latitude;
-            playerPosition.y = Input.location.lastData.longitude;
 
-            coordinates.text = "Lat: " + playerPosition.x + " Lon: " + playerPosition.y;
+        }
+        switch (Input.location.status)
+        {
+            case LocationServiceStatus.Running:
+                {
+                    playerPosition.x = Input.location.lastData.latitude;
+                    playerPosition.y = Input.location.lastData.longitude;
+
+                    coordinates.text = "Lat: " + playerPosition.x + " Lon: " + playerPosition.y;
+                    break;
+                }
+            case LocationServiceStatus.Failed:
+                coordinates.text = "Failed to get location";
+                break;
         }
     }
 
     IEnumerator locationServiceStart()
     {
         Input.location.Start();
+        coordinates.text = "Searching current location";
 
         // Check if user has location service enabled
         if (!Input.location.isEnabledByUser)
@@ -65,7 +78,7 @@ public class PositionController : MonoBehaviour
                 () =>
                 {
 #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
+                    //UnityEditor.EditorApplication.isPlaying = false;
 #else
                     Application.Quit();
 #endif
@@ -75,11 +88,13 @@ public class PositionController : MonoBehaviour
 
         // Start service before quering location
         Input.location.Start();
+        
 
         // Wait until service initializates
-        int maxWait = 20;
+        int maxWait = timeOut;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
         {
+            coordinates.text = "Searching current location, remaining time: " + maxWait;
             yield return new WaitForSeconds(1);
             --maxWait;
         }
@@ -96,11 +111,6 @@ public class PositionController : MonoBehaviour
         {
             GameController.instance.DisplayMessageBox("Unable to determine device location", () => { Application.Quit(); });
             yield break;
-        }
-        else
-        {
-            // Access granted and location available
-            Debug.Log("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude);
         }
 
         yield return true;

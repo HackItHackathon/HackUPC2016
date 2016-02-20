@@ -23,7 +23,7 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   m_ActiveColorSpace: 0
   m_MTRendering: 1
-  m_MobileMTRendering: 0
+  m_MobileMTRendering: 1
   m_Stereoscopic3D: 0
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: 2
@@ -173,7 +173,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 7b9a24eec7fb33440bbbb0eab2d1adf1, type: 3}
+      m_Icon: {fileID: 2800000, guid: 0ca1bf99d804cce49bdea7bd403b3ebd, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []
