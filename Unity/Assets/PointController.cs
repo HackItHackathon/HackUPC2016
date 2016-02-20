@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PointController : MonoBehaviour {
@@ -24,4 +25,8 @@ public class PointController : MonoBehaviour {
         if(txt!=null) txt.text = currentscore.ToString();
 
 	}
+    public void LoadScene(string level)
+    {
+        SceneManager.LoadScene(level);
+    }
 }
