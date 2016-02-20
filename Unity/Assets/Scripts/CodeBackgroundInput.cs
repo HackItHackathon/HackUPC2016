@@ -45,8 +45,9 @@ public class CodeBackgroundInput : MonoBehaviour {
     {
         if(count > 0)
         {
-            //codeImages[count].GetComponent<CodeImage>().D
+            Destroy(codeImages[count-1]);
             --count;
+            Debug.Log("Now we are at " + count);
         }
     }
 }

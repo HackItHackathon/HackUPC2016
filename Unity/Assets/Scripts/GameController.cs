@@ -7,10 +7,10 @@ public class GameController : MonoBehaviour {
 
     [HideInInspector]
     public static GameController instance;
-    public PositionController positionController;
     public Canvas canvas;
     public GameObject messageBox;
 
+    private PositionController positionController;
     private static string codeElements = "";
 
 	// Use this for initialization
@@ -24,9 +24,13 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-        Debug.Log("Game Started");
-        positionController = gameObject.AddComponent<PositionController>();
 	}
+
+    void Start()
+    {
+        Debug.Log("Game Started");
+        positionController = GetComponent<PositionController>();
+    }
 
     public static void setCodeElement(string id)
     {

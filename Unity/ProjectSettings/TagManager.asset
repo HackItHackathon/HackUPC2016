@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - CodeBackgroundInput
-=======
-  - username
-  - login
->>>>>>> 8adf6d8a1dca48d2a68eb1f3d5d5ee00af300ed1
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -19,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - Background
+  - 
   - 
   - 
   - 
