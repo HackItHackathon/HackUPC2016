@@ -124,10 +124,14 @@ public class PositionController : MonoBehaviour
                 GameObject[] objects = GameObject.FindGameObjectsWithTag("Player");
                 //foreach (GameObject obj in objects) Destroy(obj);
 
+                ArrayList keys = new ArrayList();
+
                 foreach (int key in victimsV.Keys)
                 {
-                    victimsV[key] = false;
+                    keys.Add(key);
                 }
+
+                for (int i = 0; i < keys.Count; ++i) victimsV[keys[i]] = true;
 
                 // Get the nearest
                 int index = near.table.Length > 0 ? 0 : -1;
