@@ -6,7 +6,6 @@ public class RadarRotator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Input.location.Start();
-
     }
 	
 	// Update is called once per frame
