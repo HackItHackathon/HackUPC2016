@@ -22,8 +22,9 @@ public class Defenses : MonoBehaviour {
 
     void Start()
     {
-        Debug.Log("Game Started");
+        Debug.Log("Defenses. ID: " + GameController.instance.ID);
         string url = "http://interact.siliconpeople.net/hackathon/getshield?id=" + GameController.instance.ID;
+        Debug.Log("Getting defenses: " + url);
         WWW web = new WWW(url);
         while (!web.isDone) ;
         Getshield info = new Getshield();
