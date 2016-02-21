@@ -57,7 +57,7 @@ public class Menu : MonoBehaviour {
     public void LoadScene(string level)
     {
         //GameController.instance.scenesStack.Push(level);
-        Debug.Log("Before entering: " + GameController.instance.ID);
+        Debug.Log("Before entering: " + GameController.instance.ID + "GameController: " + GameController.instance);
         SceneManager.LoadScene(level);
     }
 }

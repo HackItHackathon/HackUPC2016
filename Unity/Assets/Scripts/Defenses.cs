@@ -13,16 +13,16 @@ public class Defenses : MonoBehaviour {
     //private int delta_time;
     private string partides = "0";
     // Use this for initialization
-    /*void Awake ()
+    void Awake ()
     {
-        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-        cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+        //System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        //cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
     }
-    */
+
 
     void Start()
     {
-        Debug.Log("Defenses. ID: " + GameController.instance.ID);
+        Debug.Log("Defenses. ID: " + GameController.instance.ID + "GameController: " + GameController.instance);
         string url = "http://interact.siliconpeople.net/hackathon/getshield?id=" + GameController.instance.ID;
         Debug.Log("Getting defenses: " + url);
         WWW web = new WWW(url);
