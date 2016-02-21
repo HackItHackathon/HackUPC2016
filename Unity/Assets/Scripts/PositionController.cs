@@ -72,11 +72,14 @@ public class PositionController : MonoBehaviour
 
     IEnumerator locationRefresh()
     {
-        //playerPosition.x = Mathf.Deg2Rad * Input.location.lastData.latitude;
-        //playerPosition.y = Mathf.Deg2Rad * Input.location.lastData.longitude;
 
+# if UNITY_EDITOR
         playerPosition = new Vector2(41.389247f, 2.1127898f);
         playerPosition *= Mathf.Deg2Rad;
+#else
+        playerPosition.x = Mathf.Deg2Rad * Input.location.lastData.latitude;
+        playerPosition.y = Mathf.Deg2Rad * Input.location.lastData.longitude;
+#endif
 
         // Get User info
         string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + GameController.instance.ID;
@@ -106,6 +109,7 @@ public class PositionController : MonoBehaviour
         else
         {
             // Get near victims info
+
             url = "http://interact.siliconpeople.net/hackathon/getidnear?id=" + GameController.instance.ID;
             web = new WWW(url);
             while (!web.isDone) ;
