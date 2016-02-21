@@ -86,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 142504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2405cae8f9f939840ad7099355bb67a9, type: 3}
+  m_Script: {fileID: 11500000, guid: dc38ddfec9e4130488a9a2512e775913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeOutTime: 4
@@ -117,6 +117,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Radius
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

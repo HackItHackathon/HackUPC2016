@@ -433,7 +433,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45, y: -70}
+  m_AnchoredPosition: {x: 45, y: -125}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &887404302
@@ -504,7 +504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   codeImage: {fileID: 150940, guid: 0a16dbb3b03abb04d9b8dc70872226ba, type: 2}
   timeText: {fileID: 887404302}
-  height: 3
+  height: 0
 --- !u!4 &970526567
 Transform:
   m_ObjectHideFlags: 0
@@ -592,7 +592,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6, y: 82}
+  m_AnchoredPosition: {x: 6, y: 110.42}
   m_SizeDelta: {x: 151, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1677959505
@@ -693,8 +693,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2130255335}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 1}
-  m_LocalScale: {x: 15, y: 5, z: 1}
+  m_LocalPosition: {x: -0.3, y: 0.1, z: 1}
+  m_LocalScale: {x: 13, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5

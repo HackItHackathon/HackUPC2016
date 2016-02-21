@@ -491,7 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1980e1dae685f0489005b2a6084d973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -30
+  speed: -60
 --- !u!1 &1490185952
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +657,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.5
   m_StartWidth: 6.2
   m_EndWidth: 6.2
   m_Colors:
@@ -882,9 +882,11 @@ MonoBehaviour:
   - {x: -1, y: 4}
   playerPosition: {x: 0, y: 0}
   userPoint: {fileID: 142504, guid: 420b56c1110246b45b4c68cb5b3f77c1, type: 2}
-  radarLines: {fileID: 0}
+  radarLines: {fileID: 1818292962}
   coordinates: {fileID: 1883555402}
   timeOut: 30
+  radarRadius: 300
+  scaleFactor: 0
 --- !u!1 &2012339128
 GameObject:
   m_ObjectHideFlags: 0
