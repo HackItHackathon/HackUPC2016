@@ -60,10 +60,6 @@ public class Defenses : MonoBehaviour {
     }
     public void LoadScene(string level)
     {
-<<<<<<< HEAD
-=======
-        //GameController.instance.gameId = ;
->>>>>>> 6e189159c0d01cb03ffacd6ce4669b69b521ab2b
         GameController.instance.isAttacker = false;
         SceneManager.LoadScene(level);
     }
