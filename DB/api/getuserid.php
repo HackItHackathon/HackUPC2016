@@ -27,13 +27,13 @@ if(mysqli_num_rows($result) == 0){
 	$result = $conn->query($sql);
 	$sql = "SELECT id FROM users WHERE nom = '" . $_GET['nom'] . "'";
 	$result = $conn->query($sql);
-	$row= $result->fetch_row();
-	$arr = array('id' =>  $row[0]);
+	$row= $result->fetch_assoc();
+	$arr = array('id' =>  $row['id']);
 	echo json_encode($arr);
 	
 } else {
-	$row= $result->fetch_row();
-	$arr = array('id' =>  $row[0]);
+	$row= $result->fetch_assoc();
+	$arr = array('id' =>  $row['id']);
 	echo json_encode($arr);	
 }
 

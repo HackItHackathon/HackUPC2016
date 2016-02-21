@@ -21,7 +21,8 @@ $sql = "SELECT id, nom, latitude,longitude,ida,punt FROM users WHERE id = '" . $
 
 $result = $conn->query($sql);
 
-$row= $result->fetch_row();
+$row= $result->fetch_assoc();
+
 
 $arr = array('id' => $row['id'], 'nom' => $row['nom'],'punt' => $row['punt'],
 		'location' => array('latitude' => $row['latitude'], 'longitude' => $row['longitude']), 'ida' => $row['ida']);
