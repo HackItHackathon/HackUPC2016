@@ -1,8 +1,11 @@
-﻿public class Getuserid
+﻿[System.Serializable]
+public class Getuserid
 {
     public int id;
 }
 
+
+[System.Serializable]
 public class Getshield
 {
     public int gameid;
@@ -11,6 +14,7 @@ public class Getshield
     public string time;
 }
 
+[System.Serializable]
 public class DBUser
 {
     public float distance;
@@ -21,11 +25,19 @@ public class DBUser
 	public int punt;
 }
 
+[System.Serializable]
+public class Game
+{
+    public int gameId;
+}
+
+[System.Serializable]
 public class Getnearid
 {
     public DBUser[] table;
 }
 
+[System.Serializable]
 public class Getuserinfo
 {
     public int id;
@@ -36,6 +48,7 @@ public class Getuserinfo
     public int ida;
 }
 
+[System.Serializable]
 public class Setgame
 {
     public int gameid;

@@ -89,4 +89,9 @@ public class GameController : MonoBehaviour
     {
         
     }
+    public void LoadScene(string level)
+    {
+        //GameController.instance.scenesStack.Push(level);
+        SceneManager.LoadScene(level);
+    }
 }

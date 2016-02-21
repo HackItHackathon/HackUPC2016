@@ -6,19 +6,19 @@ using System.Collections;
 public class Defenses : MonoBehaviour {
     public Text txtpartidesleft;
     public Text txtplayer;
-    public Text txttime;
+    //public Text txttime;
     private string player;
-    private int time;
-    private int cur_time;
-    private int delta_time;
+    //private int time;
+    //private int cur_time;
+    //private int delta_time;
     private string partides = "0";
     // Use this for initialization
-    void Awake ()
+    /*void Awake ()
     {
         System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
         cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
     }
-
+    */
 
     void Start()
     {
@@ -32,13 +32,13 @@ public class Defenses : MonoBehaviour {
             JsonUtility.FromJsonOverwrite(web.text, info);
             player = info.nom;
             partides = info.partides.ToString();
-            Debug.Log(info.time);
+            Debug.Log("Time: " + info.time);
             GameController.instance.gameId = info.gameid;
             GameController.instance.isAttacker = false;
             txtplayer.text = "hiol";
             txtpartidesleft.text = "0";
-
-
+            //Debug.Log(System.DateTime.Parse(info.time));
+            //cur_time = (int)(System.DateTime.Parse(info.time) - epochStart).TotalSeconds;
             /*
             time = (Int32)info.time;
             delta_time = time - cur_time;*/
@@ -46,7 +46,7 @@ public class Defenses : MonoBehaviour {
         else
         {
             txtplayer.enabled = false;
-            txttime.enabled = false;
+            //txttime.enabled = false;
         }
         
 

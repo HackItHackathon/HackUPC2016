@@ -5,12 +5,6 @@ using System.Collections;
 
  
 
-/*
-public class Getuserid
-{
-    public int id;
-}*/
-
 public class Login : MonoBehaviour {
 
     public Text userName;

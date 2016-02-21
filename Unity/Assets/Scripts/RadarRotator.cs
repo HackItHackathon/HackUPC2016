@@ -10,7 +10,6 @@ public class RadarRotator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(Input.compass.trueHeading);
         transform.Rotate(new Vector3(0,0,-Input.compass.trueHeading));
     }
 }
