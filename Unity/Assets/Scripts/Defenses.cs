@@ -38,7 +38,7 @@ public class Defenses : MonoBehaviour {
             txtplayer.text = "hiol";
             txtpartidesleft.text = "0";
             Debug.Log(System.DateTime.Parse(info.time));
-            cur_time = (int)(System.DateTime.Parse(info.time) - epochStart).TotalSeconds;
+            //cur_time = (int)(System.DateTime.Parse(info.time) - epochStart).TotalSeconds;
             /*
             time = (Int32)info.time;
             delta_time = time - cur_time;*/
