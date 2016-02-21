@@ -92,8 +92,6 @@ public class PositionController : MonoBehaviour
             JsonUtility.FromJsonOverwrite(web.text, user);
             user.ida = -1;
 
-            Debug.Log("pepe");
-
             // Check if we already have a victim selected
             if (user.ida >= 0)
             {
@@ -148,7 +146,6 @@ public class PositionController : MonoBehaviour
             url = "http://interact.siliconpeople.net/hackathon/setlocation?id=" + ID + "&latitude=" + playerPosition.x + "&longitude=" + playerPosition.y;
             web = new WWW(url);
 
-            Debug.Log("prova");
             yield return new WaitForSeconds(2);
         }
     }
