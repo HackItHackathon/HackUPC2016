@@ -5,7 +5,7 @@ using System.Collections;
 
  
 
-public class Login : MonoBehaviour {
+public class Login_new : MonoBehaviour {
 
     public Text userName;
 
