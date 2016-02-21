@@ -17,15 +17,9 @@ public class GameController : MonoBehaviour
     public Stack scenesStack = new Stack();
     public int gameId = 0; // TODO: Joan passam-ho
     public bool isAttacker = true; // TODO: tambe aixo
-
-
-
     public float puntuation = 0;
 
-
     private PositionController positionController;
-    
-
     private int gamenumber = 0;
 
     // Use this for initialization
@@ -77,11 +71,12 @@ public class GameController : MonoBehaviour
             // send it to the DB
             // first convert the puntuation to an integer
             int puntInt = (int) (puntuation * 1000f);
-            string url = "http://interact.siliconpeople.net/hackathon/setpoint?gameid=" + gameId + "&punt";
+            string url = "http://interact.siliconpeople.net/hackathon/setpoints?gameid=" + gameId + "&punt";
             url += isAttacker ? "a=" : "d=" ;
             url += puntInt.ToString();
             WWW web = new WWW(url);
             Debug.Log(url);
+            SceneManager.LoadScene("Menu");
         }
         else
         {
