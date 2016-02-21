@@ -356,7 +356,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1959229977}
-        m_MethodName: attackVictim
+        m_MethodName: AttackVictim
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
