@@ -104,6 +104,6 @@ while($i<sizeof($arrayusers)  ){
 	array_push($arrayaux, $arrayusers[$i]);
 	$i= $i +1;
 }
-echo json_encode($arrayaux);
+echo json_encode(array( 'table' => $arrayaux ));
 
 ?>
