@@ -11,7 +11,7 @@ public class Attacker : MonoBehaviour {
         posC = GetComponent<PositionController>();
 	}
 	
-	void attackVictim()
+	public void AttackVictim()
     {
         string url = "http://interact.siliconpeople.net/hackathon/setgame?ida=" + GameController.instance.ID + "&idd=" + posC.victim.ID;
         WWW web = new WWW(url);
