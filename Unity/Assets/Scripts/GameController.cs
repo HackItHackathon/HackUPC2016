@@ -19,10 +19,12 @@ public class GameController : MonoBehaviour
     public bool isAttacker = true; // TODO: tambe aixo
 
 
+
     public float puntuation = 0;
 
 
     private PositionController positionController;
+    
 
     private int gamenumber = 0;
 
@@ -40,10 +42,7 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-        Debug.Log("Game Started");
-    }
+    
 
     public void DisplayMessageBox(string text, UnityAction a)
     {

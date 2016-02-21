@@ -3,6 +3,14 @@
     public int id;
 }
 
+public class Getshield
+{
+    public int gameid;
+    public int partides;
+    public string nom;
+    public string time;
+}
+
 public class DBUser
 {
     public float distance;
