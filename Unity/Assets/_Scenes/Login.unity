@@ -316,7 +316,7 @@ GameObject:
   - 114: {fileID: 206433560}
   - 114: {fileID: 206433562}
   m_Layer: 0
-  m_Name: SceneController
+  m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,6 +361,8 @@ MonoBehaviour:
   canvas: {fileID: 0}
   messageBox: {fileID: 161304, guid: 892de48cb66b9634d87250f540e37090, type: 2}
   ID: 0
+  gameId: 0
+  isAttacker: 1
   puntuation: 0
 --- !u!1 &309965451
 GameObject:

@@ -4,23 +4,23 @@ using System.Collections;
 
 public class PositionController : MonoBehaviour
 {
-    private struct PlayerPoint
+    public struct PlayerPoint
     {
         public long ID;
         public Vector2 position;
-        public Vector3 cartesianPosition;
-        public GameObject pointObject;
     };
 
-    public Vector2[] positions = { new Vector2(2f, 3f), new Vector2(-1f, 4f) };
     public Vector2 playerPosition;
     public GameObject userPoint;
     public GameObject radarLines;
+    public GameObject radarParent;
+    public Button hackButton;
 
     public Text coordinates;
     public int timeOut = 30;
     public float radarRadius;
-    public float scaleFactor;
+    public float attackRadius;
+
 
     public static float equR = 6.3844e6f;  // Equatorial radius
     public static float polR = 6.3528e6f;  // Polar radius
@@ -29,7 +29,8 @@ public class PositionController : MonoBehaviour
     public static float equR4;             // Equatorial radius pow 4
     public static float polR4;             // Polar radius pow 4
 
-    private PlayerPoint victim = new PlayerPoint();
+    public PlayerPoint victim = new PlayerPoint();
+    private float scaleFactor;
 
     // Use this for initialization
     void Start()
@@ -53,10 +54,9 @@ public class PositionController : MonoBehaviour
 
     void Update()
     {
-        if (Input.location.status == LocationServiceStatus.Running)
-        {
-
-        }
+#if UNITY_EDITOR
+        coordinates.text = "Lat: " + Mathf.Rad2Deg * playerPosition.x + " Lon: " + Mathf.Rad2Deg * playerPosition.y;
+#else
         switch (Input.location.status)
         {
             case LocationServiceStatus.Running:
@@ -66,23 +66,25 @@ public class PositionController : MonoBehaviour
                 coordinates.text = "Failed to get location";
                 break;
         }
-        // TEMP
-        coordinates.text = "Lat: " + Mathf.Rad2Deg * playerPosition.x + " Lon: " + Mathf.Rad2Deg * playerPosition.y;
+#endif
     }
 
     IEnumerator locationRefresh()
     {
 
-# if UNITY_EDITOR
-        playerPosition = new Vector2(41.389247f, 2.1127898f);
+#if UNITY_EDITOR
+        int ID = 22;
+        playerPosition = new Vector2(41.389373f, 2.1116378f);
         playerPosition *= Mathf.Deg2Rad;
 #else
+        int ID = GameController.instance.ID;
         playerPosition.x = Mathf.Deg2Rad * Input.location.lastData.latitude;
         playerPosition.y = Mathf.Deg2Rad * Input.location.lastData.longitude;
+        Debug.Log(playerPosition);
 #endif
 
         // Get User info
-        string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + GameController.instance.ID;
+        string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + ID;
         WWW web = new WWW(url);
         while (!web.isDone) ;
         Getuserinfo user = new Getuserinfo();
@@ -102,7 +104,7 @@ public class PositionController : MonoBehaviour
             if (victim.ID < 0)
             {
                 victim.ID = user.ida;
-                //victim.position = new Vector2(aux.latitude, aux.longitude);
+                victim.position = new Vector2(aux.latitude, aux.longitude);
             }
             changePoint(victim);
         }
@@ -110,40 +112,56 @@ public class PositionController : MonoBehaviour
         {
             // Get near victims info
 
-            url = "http://interact.siliconpeople.net/hackathon/getidnear?id=" + GameController.instance.ID;
+            url = "http://interact.siliconpeople.net/hackathon/getidnear?id=" + ID;
             web = new WWW(url);
             while (!web.isDone) ;
             Getnearid near = new Getnearid();
+            near.table = new DBUser[] { };
             Debug.Log(web.text);
             JsonUtility.FromJsonOverwrite(web.text, near);
-            Debug.Log(near.table[0].id); 
+
+            GameObject[] objects = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject obj in objects) Destroy(obj);
 
             // Get the nearest
             int index = near.table.Length > 0 ? 0 : -1;
             for (int i = 0; i < near.table.Length; ++i)
             {
+                // Find the nearest
                 if (near.table[i].distance < near.table[index].distance) index = i;
+
+                drawPoint(new Vector2(near.table[i].latitude, near.table[i].longitude));
             }
 
-            DBUser aux = near.table[index]; 
-
-            victim.ID = aux.id; 
-            victim.position = new Vector2(aux.latitude, aux.longitude); 
-            drawPoint(victim);
+            if (index >= 0)
+            {
+                hackButton.interactable = (near.table[index].distance < attackRadius);
+                victim.ID = near.table[index].id;
+                victim.position = new Vector2(near.table[index].latitude, near.table[index].longitude);
+            }
+            
         }
 
-        yield return new WaitForSeconds(5);
+        url = "http://interact.siliconpeople.net/hackathon/setlocation?id=" + ID + "&latitude=" + playerPosition.x + "&longitude=" + playerPosition.y;
+        web = new WWW(url);
+
+        yield return new WaitForSeconds(2);
     }
 
     IEnumerator locationServiceStart()
     {
-        Input.location.Start();
+        Input.location.Start(0.5f, 0.5f);
         coordinates.text = "Searching current location";
+        Debug.Log("Location Service start");
+
+#if UNITY_EDITOR
+        yield break;
+#endif
 
         // Check if user has location service enabled
         if (!Input.location.isEnabledByUser)
         {
-            GameController.instance.DisplayMessageBox(  "Please turn on location service", 
+            GameController.instance.DisplayMessageBox("Please turn on location service",
                                                         () => { Application.Quit(); });
             yield break;
         }
@@ -164,7 +182,7 @@ public class PositionController : MonoBehaviour
         // Service didn't initalizate in 20 seconds
         if (maxWait < 1)
         {
-            GameController.instance.DisplayMessageBox(  "Initialization timed out", 
+            GameController.instance.DisplayMessageBox("Initialization timed out",
                                                         () => { Application.Quit(); });
             yield break;
         }
@@ -229,24 +247,21 @@ public class PositionController : MonoBehaviour
         return new Vector3(Vector3.Dot(diff, E), Vector3.Dot(diff, N), 0);
     }
 
-    void drawPoint(PlayerPoint vict)
+    void drawPoint(Vector2 vict)
     {
-        Vector3 pos = getCartesian2D(vict.position);
-        vict.cartesianPosition = pos;
-        Debug.Log("Pos: " + pos);
+        Vector3 pos = getCartesian2D(vict);
         pos *= scaleFactor;
-        Debug.Log("Pos2: " + pos);
 
-        victim.pointObject = Instantiate(userPoint, pos, Quaternion.Euler(90f, 0, 0)) as GameObject;
+        GameObject aux = Instantiate(userPoint, pos, Quaternion.Euler(90f, 0, 0)) as GameObject;
+        aux.transform.SetParent(radarParent.transform);
     }
 
     void changePoint(PlayerPoint vict)
     {
         Vector3 pos = getCartesian2D(vict.position);
-        vict.cartesianPosition = pos;
+        //vict.cartesianPosition = pos;
         pos *= scaleFactor;
 
-        Debug.Log("Pos: " + pos);
-        victim.pointObject.transform.position = pos;
+        //victim.pointObject.transform.position = pos;
     }
 }
