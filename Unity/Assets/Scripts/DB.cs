@@ -28,4 +28,9 @@ public class Getuserinfo
     public int ida;
 }
 
+public class Setgame
+{
+    public int gameid;
+}
+
 
