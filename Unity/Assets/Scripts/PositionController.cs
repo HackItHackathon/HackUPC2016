@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class PositionController : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class PositionController : MonoBehaviour
 
     public PlayerPoint victim = new PlayerPoint();
     private float scaleFactor;
+    private Hashtable victims = new Hashtable();
+    private Hashtable victimsV = new Hashtable();
 
     // Use this for initialization
     void Start()
@@ -46,7 +49,6 @@ public class PositionController : MonoBehaviour
 
         SpriteRenderer radarRenderer = radarLines.GetComponent<SpriteRenderer>();
         scaleFactor = radarRenderer.bounds.size.x / radarRadius;
-        Debug.Log("Bounds: " + radarRenderer.bounds.size.x);
 
         StartCoroutine(locationServiceStart());
         StartCoroutine(locationRefresh());
@@ -81,7 +83,6 @@ public class PositionController : MonoBehaviour
         int ID = GameController.instance.ID;
         playerPosition.x = Mathf.Deg2Rad * Input.location.lastData.latitude;
         playerPosition.y = Mathf.Deg2Rad * Input.location.lastData.longitude;
-        Debug.Log(playerPosition);
 #endif
 
             // Get User info
@@ -107,7 +108,7 @@ public class PositionController : MonoBehaviour
                     victim.ID = user.ida;
                     victim.position = new Vector2(aux.latitude, aux.longitude);
                 }
-                changePoint(victim);
+                //changePoint(victim.position, victim.);
             }
             else
             {
@@ -118,11 +119,19 @@ public class PositionController : MonoBehaviour
                 while (!web.isDone) ;
                 Getnearid near = new Getnearid();
                 near.table = new DBUser[] { };
-                Debug.Log(web.text);
                 JsonUtility.FromJsonOverwrite(web.text, near);
 
                 GameObject[] objects = GameObject.FindGameObjectsWithTag("Player");
-                foreach (GameObject obj in objects) Destroy(obj);
+                //foreach (GameObject obj in objects) Destroy(obj);
+
+                ArrayList keys = new ArrayList();
+
+                foreach (int key in victimsV.Keys)
+                {
+                    keys.Add(key);
+                }
+
+                for (int i = 0; i < keys.Count; ++i) victimsV[keys[i]] = true;
 
                 // Get the nearest
                 int index = near.table.Length > 0 ? 0 : -1;
@@ -130,8 +139,29 @@ public class PositionController : MonoBehaviour
                 {
                     // Find the nearest
                     if (near.table[i].distance < near.table[index].distance) index = i;
+                    int id = near.table[i].id;
+                    Vector2 pos = new Vector2(near.table[i].latitude, near.table[i].longitude);
 
-                    drawPoint(new Vector2(near.table[i].latitude, near.table[i].longitude));
+                    victimsV[id] = true;
+                    if (victims.ContainsKey(id))
+                    {
+                        changePoint(pos, victims[id] as GameObject);
+                    }
+                    else
+                    {
+                        GameObject aux = drawPoint(pos);
+                        victims[id] = aux;
+                    }
+                }
+
+                foreach (int key in victimsV.Keys)
+                {
+                    if (! (bool) victimsV[key])
+                    {
+                        victimsV.Remove(key);
+                        Destroy((GameObject) victims[key]);
+                        victims.Remove(key);
+                    }
                 }
 
                 if (index >= 0)
@@ -146,7 +176,7 @@ public class PositionController : MonoBehaviour
             url = "http://interact.siliconpeople.net/hackathon/setlocation?id=" + ID + "&latitude=" + playerPosition.x + "&longitude=" + playerPosition.y;
             web = new WWW(url);
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(5);
         }
     }
 
@@ -249,21 +279,22 @@ public class PositionController : MonoBehaviour
         return new Vector3(Vector3.Dot(diff, E), Vector3.Dot(diff, N), 0);
     }
 
-    void drawPoint(Vector2 vict)
+    GameObject drawPoint(Vector2 vict)
     {
         Vector3 pos = getCartesian2D(vict);
         pos *= scaleFactor;
 
         GameObject aux = Instantiate(userPoint, pos, Quaternion.Euler(90f, 0, 0)) as GameObject;
         aux.transform.SetParent(radarParent.transform);
+        return aux;
     }
 
-    void changePoint(PlayerPoint vict)
+    void changePoint(Vector2 vict, GameObject obj)
     {
-        Vector3 pos = getCartesian2D(vict.position);
+        Vector3 pos = getCartesian2D(vict);
         //vict.cartesianPosition = pos;
         pos *= scaleFactor;
-
+        obj.transform.position = pos;
         //victim.pointObject.transform.position = pos;
     }
 }

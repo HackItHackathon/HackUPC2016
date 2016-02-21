@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804dcea2f906db84686ba0ec788bdf0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userName: {fileID: 59427195}
 --- !u!4 &206433561
 Transform:
   m_ObjectHideFlags: 0
@@ -340,11 +341,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 206433559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 299.5, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 244.25287, y: -164.36781, z: 0}
+  m_LocalScale: {x: 1.1494253, y: 1.1494253, z: 1.1494253}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1181190940}
+  m_RootOrder: 2
 --- !u!114 &206433562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,9 +439,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 206433562}
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 206433560}
+        m_MethodName: onClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -703,6 +704,7 @@ RectTransform:
   m_Children:
   - {fileID: 1572713019}
   - {fileID: 309965452}
+  - {fileID: 206433561}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
