@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour
     public GameObject messageBox;
     public int ID;
     public Stack scenesStack = new Stack();
+    public int gameId = 0; // TODO: Joan passam-ho
+    public bool isAttacker = true; // TODO: tambe aixo
+
 
     public float puntuation = 0;
 
@@ -22,8 +25,6 @@ public class GameController : MonoBehaviour
     private PositionController positionController;
 
     private int gamenumber = 0;
-    private int gameId = 0; // TODO: Joan passam-ho
-    private bool isAttacker = true; // TODO: tambe aixo
 
     // Use this for initialization
     void Awake()
