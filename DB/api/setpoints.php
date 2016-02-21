@@ -17,18 +17,29 @@ if ($conn->connect_error) {
 
 
 if(isset($_GET['punta'])){
-	$sql = "UPDATE `games` SET `punta`=". $_GET['punta'] ." WHERE `gameid` = " + $_GET['gameid'] ;
+	echo "punta is set";
+	$sql = "UPDATE games SET punta="  . $_GET['punta'] . " WHERE gameid = " . $_GET['gameid'] ;
+	echo $sql;
+	
 	$result = $conn->query($sql);
 	//SELECT * FROM games WHERE gameid = 2 AND punta != -1 AND puntd !=-1
 
 	
 }
 if(isset($_GET['puntd'])){
-	$sql = "UPDATE `games` SET `puntd`=" . $_GET['puntd'] . " WHERE `gameid` = " + $_GET['gameid'] ;
+
+	echo "puntd is set";
+	$sql = "UPDATE games SET puntd= '" . $_GET['puntd'] . "' WHERE gameid = " . $_GET['gameid'] ;
+
+	echo $sql;
 	$result = $conn->query($sql);
+
 }
 $sql = "SELECT * FROM games WHERE gameid = " . $_GET['gameid'] . " AND punta != -1 AND puntd !=-1";
 $result = $conn->query($sql);
+
+echo $sql;
+
 if(mysqli_num_rows($result) == 1){
 	$row=$result->fetch_assoc();
 	if($row['punta']>=$row['puntd']){
