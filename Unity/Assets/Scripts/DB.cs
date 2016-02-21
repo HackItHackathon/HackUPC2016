@@ -14,6 +14,7 @@ public class Getshield
     public string time;
 }
 
+[System.Serializable]
 public class DBUser
 {
     public float distance;
@@ -47,6 +48,7 @@ public class Getuserinfo
     public int ida;
 }
 
+[System.Serializable]
 public class Setgame
 {
     public int gameid;

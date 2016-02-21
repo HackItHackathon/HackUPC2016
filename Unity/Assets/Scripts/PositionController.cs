@@ -71,11 +71,12 @@ public class PositionController : MonoBehaviour
 
     IEnumerator locationRefresh()
     {
-
+        while (true)
+        {
 #if UNITY_EDITOR
-        int ID = 22;
-        playerPosition = new Vector2(41.389373f, 2.1116378f);
-        playerPosition *= Mathf.Deg2Rad;
+            int ID = 22;
+            playerPosition = new Vector2(41.389373f, 2.1116378f);
+            playerPosition *= Mathf.Deg2Rad;
 #else
         int ID = GameController.instance.ID;
         playerPosition.x = Mathf.Deg2Rad * Input.location.lastData.latitude;
@@ -83,69 +84,73 @@ public class PositionController : MonoBehaviour
         Debug.Log(playerPosition);
 #endif
 
-        // Get User info
-        string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + ID;
-        WWW web = new WWW(url);
-        while (!web.isDone) ;
-        Getuserinfo user = new Getuserinfo();
-        JsonUtility.FromJsonOverwrite(web.text, user);
-        user.ida = -1;
-
-        // Check if we already have a victim selected
-        if (user.ida >= 0)
-        {
-            // Get victim info
-            url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + user.ida;
-            web = new WWW(url);
+            // Get User info
+            string url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + ID;
+            WWW web = new WWW(url);
             while (!web.isDone) ;
-            Getuserinfo aux = new Getuserinfo();
-            JsonUtility.FromJsonOverwrite(web.text, aux);
+            Getuserinfo user = new Getuserinfo();
+            JsonUtility.FromJsonOverwrite(web.text, user);
+            user.ida = -1;
 
-            if (victim.ID < 0)
+            Debug.Log("pepe");
+
+            // Check if we already have a victim selected
+            if (user.ida >= 0)
             {
-                victim.ID = user.ida;
-                victim.position = new Vector2(aux.latitude, aux.longitude);
-            }
-            changePoint(victim);
-        }
-        else
-        {
-            // Get near victims info
+                // Get victim info
+                url = "http://interact.siliconpeople.net/hackathon/getuserinfo?id=" + user.ida;
+                web = new WWW(url);
+                while (!web.isDone) ;
+                Getuserinfo aux = new Getuserinfo();
+                JsonUtility.FromJsonOverwrite(web.text, aux);
 
-            url = "http://interact.siliconpeople.net/hackathon/getidnear?id=" + ID;
+                if (victim.ID < 0)
+                {
+                    victim.ID = user.ida;
+                    victim.position = new Vector2(aux.latitude, aux.longitude);
+                }
+                changePoint(victim);
+            }
+            else
+            {
+                // Get near victims info
+
+                url = "http://interact.siliconpeople.net/hackathon/getidnear?id=" + ID;
+                web = new WWW(url);
+                while (!web.isDone) ;
+                Getnearid near = new Getnearid();
+                near.table = new DBUser[] { };
+                Debug.Log(web.text);
+                JsonUtility.FromJsonOverwrite(web.text, near);
+
+                GameObject[] objects = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject obj in objects) Destroy(obj);
+
+                // Get the nearest
+                int index = near.table.Length > 0 ? 0 : -1;
+                for (int i = 0; i < near.table.Length; ++i)
+                {
+                    // Find the nearest
+                    if (near.table[i].distance < near.table[index].distance) index = i;
+
+                    drawPoint(new Vector2(near.table[i].latitude, near.table[i].longitude));
+                }
+
+                if (index >= 0)
+                {
+                    hackButton.interactable = (near.table[index].distance <= attackRadius);
+                    victim.ID = near.table[index].id;
+                    victim.position = new Vector2(near.table[index].latitude, near.table[index].longitude);
+                }
+
+            }
+
+            url = "http://interact.siliconpeople.net/hackathon/setlocation?id=" + ID + "&latitude=" + playerPosition.x + "&longitude=" + playerPosition.y;
             web = new WWW(url);
-            while (!web.isDone) ;
-            Getnearid near = new Getnearid();
-            near.table = new DBUser[] { };
-            Debug.Log(web.text);
-            JsonUtility.FromJsonOverwrite(web.text, near);
 
-            GameObject[] objects = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject obj in objects) Destroy(obj);
-
-            // Get the nearest
-            int index = near.table.Length > 0 ? 0 : -1;
-            for (int i = 0; i < near.table.Length; ++i)
-            {
-                // Find the nearest
-                if (near.table[i].distance < near.table[index].distance) index = i;
-
-                drawPoint(new Vector2(near.table[i].latitude, near.table[i].longitude));
-            }
-
-            if (index >= 0)
-            {
-                hackButton.interactable = (near.table[index].distance < attackRadius);
-                victim.ID = near.table[index].id;
-                victim.position = new Vector2(near.table[index].latitude, near.table[index].longitude);
-            }
-            
+            Debug.Log("prova");
+            yield return new WaitForSeconds(2);
         }
-
-        url = "http://interact.siliconpeople.net/hackathon/setlocation?id=" + ID + "&latitude=" + playerPosition.x + "&longitude=" + playerPosition.y;
-        web = new WWW(url);
-
-        yield return new WaitForSeconds(2);
     }
 
     IEnumerator locationServiceStart()
