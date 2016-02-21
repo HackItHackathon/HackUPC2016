@@ -32,13 +32,13 @@ public class Defenses : MonoBehaviour {
             JsonUtility.FromJsonOverwrite(web.text, info);
             player = info.nom;
             partides = info.partides.ToString();
-            Debug.Log(info.time);
+            Debug.Log("Time: " + info.time);
             GameController.instance.gameId = info.gameid;
             GameController.instance.isAttacker = false;
             txtplayer.text = "hiol";
             txtpartidesleft.text = "0";
-
-
+            Debug.Log(System.DateTime.Parse(info.time));
+            cur_time = (int)(System.DateTime.Parse(info.time) - epochStart).TotalSeconds;
             /*
             time = (Int32)info.time;
             delta_time = time - cur_time;*/
