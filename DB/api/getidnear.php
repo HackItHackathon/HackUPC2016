@@ -9,13 +9,25 @@ class user {
 	public $punt;
 }
 
+function my_sort($a,$b)
+{
+	if ($a==$b) return 0;
+	return ($a->distance < $b->distance);
+}
+
 function calcdistance ($la1,$lo1,$la2,$lo2){
+	//echo "la1: " . $la1 . " lo1: " . $lo1 . " la2: " . $la2 . " lo2: " . $lo2 . "<br>";
+	
 	$R = 6371000; // metres
 	$ila = ($la2-$la1);
+	//echo "ila: " . $ila . "<br>";
 	$ilo = ($lo2-$lo1);
+
+	//echo "ilo: " . $ilo . "<br>";
 	$a = sin($ila/2) * sin($ila/2) + cos($la1) * cos($la2) * sin($ilo/2) * sin($ilo/2);
 	$c = 2 * atan2(sqrt($a), sqrt(1-$a));
 	$d = $R * $c;
+	//echo "d: " . $d . "<br>";
 	return $d;
 }
 
@@ -39,7 +51,7 @@ $sql = "SELECT id, nom, latitude,longitude, punt FROM users WHERE id = '" . $_GE
 
 $result = $conn->query($sql);
 
-$row= $result->fetch_row();
+$row= $result->fetch_assoc();
 
 $user = new user();
 $user->distance = 0;
@@ -51,8 +63,8 @@ $user->punt = $row['punt'];
 
 $arrayusers = array();
 
-$sql = "SELECT id, nom, latitude,longitude, punt FROM users WHERE id != '" 
-		. $_GET['id'] . "'" . " and ida != '" . $_GET['id'] . "'";
+$sql = "SELECT id, nom, latitude,longitude, punt FROM users WHERE id != " 
+		. $_GET['id'] . " and ida != " . $_GET['id'];
 
 //echo $sql;
 
@@ -66,11 +78,18 @@ while($row = $result->fetch_assoc()) {
 		$userf->latitude = $row['latitude'];
 		$userf->longitude = $row['longitude'];
 		$userf->punt = $row['punt'];
+		
+		//echo "Latitude: " . $user->latitude . " Longitude: " . $user->longitude . "<br>"; 
+		
 		$userf->distance = calcdistance($user->latitude, $user->longitude, $userf->latitude, $userf-> longitude);
 		array_push($arrayusers, $userf);
 	}
 }
-asort($arrayusers);
+
+uasort($arrayusers, "my_sort");
+
+
+//echo json_encode($arrayusers);
 
 $num = 1;
 $distance = 500000;
@@ -79,7 +98,9 @@ if(isset($_GET['distance'])) $distance = $_GET['distance'];
 
 $i = 0;
 $arrayaux = array();
-while($i<sizeof($arrayusers) && $i<$num && $arrayusers[$i]->distance <= $distance ){
+//echo sizeof($arrayusers);
+//&& $i<$num && $arrayusers[$i]->distance <= $distance
+while($i<sizeof($arrayusers)  ){
 	array_push($arrayaux, $arrayusers[$i]);
 	$i= $i +1;
 }

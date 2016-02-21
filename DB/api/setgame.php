@@ -33,8 +33,8 @@ $sql = "SELECT gameid FROM games WHERE ida = '" . $_GET['ida'] . "' AND idd = '"
 $result = $conn->query($sql);
 
 
-$row= $result->fetch_row();
-$arr = array('gameid' =>  $row[0]);
+$row= $result->fetch_assoc();
+$arr = array('gameid' =>  $row['gameid']);
 echo json_encode($arr);
 
 
