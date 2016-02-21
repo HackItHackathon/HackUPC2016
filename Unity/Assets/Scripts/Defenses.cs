@@ -15,7 +15,7 @@ public class Defenses : MonoBehaviour {
 	}
     public void LoadScene(string level)
     {
-        GameController.instance.gameId = ;
+        //GameController.instance.gameId = ;
         GameController.instance.isAttacker = false;
         SceneManager.LoadScene(level);
     }
