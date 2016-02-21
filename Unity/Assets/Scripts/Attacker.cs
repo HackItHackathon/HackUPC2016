@@ -10,7 +10,12 @@ public class Attacker : MonoBehaviour {
 	void Start () {
         posC = GetComponent<PositionController>();
 	}
-	
+
+    public void back()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
 	public void AttackVictim()
     {
         string url = "http://interact.siliconpeople.net/hackathon/setgame?ida=" + GameController.instance.ID + "&idd=" + posC.victim.ID;

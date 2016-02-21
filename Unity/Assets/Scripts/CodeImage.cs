@@ -26,6 +26,18 @@ public class CodeImage : MonoBehaviour {
 	void Update () {	
 	}
 
+    public void AssignSprite(string name)
+    {
+        for (int i = 0; i < sprites.Length; ++i)
+        {
+            if (sprites[i].name.Equals(name))
+            {
+                spriteRenderer.sprite = sprites[i];
+                return;
+            }
+        }
+    }
+
     public void AssignSprite(int id)
     {
         Sprite aux = sprites[id];
@@ -38,12 +50,12 @@ public class CodeImage : MonoBehaviour {
     }
 
     void OnMouseDown()
-    {
+    {        
         // this object was clicked - do something
         if (SceneManager.GetActiveScene().name.Equals("Minigame_1_input"))
         {
             string spr = spriteRenderer.sprite.name;
-            codeBackgroundInput.AddElement(Int32.Parse(spr) - 1);
+            codeBackgroundInput.AddElement(spr);
         }
     }
 

@@ -55,6 +55,20 @@ public class CodeBackgroundInput : MonoBehaviour { // this class is like a scene
         }
     }
 
+    public void AddElement(string name)
+    {
+        if (count < 4)
+        {
+            Debug.Log("001");
+            codeImages[count] = Instantiate(codeImage, new Vector3(x_values[count], height, 0), Quaternion.identity) as GameObject;
+            Debug.Log("002");
+            codeImages[count].GetComponent<CodeImage>().AssignSprite(name);
+            Debug.Log("003");
+            ++count;
+            Debug.Log("004");
+        }
+    }
+
     public void RemoveElement()
     {
         if(count > 0)
