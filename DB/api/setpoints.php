@@ -16,26 +16,28 @@ if ($conn->connect_error) {
 //echo "Connected successfully";
 
 
-//INSERT INTO `games`(`ida`,`idd`) VALUES (4,5)
+if(isset($_GET['punta'])){
+	$sql = "UPDATE `games` SET `punta`=". $_GET['punta'] ." WHERE `gameid` = " + $_GET['gameid'] ;
+	$result = $conn->query($sql);
+	//SELECT * FROM games WHERE gameid = 2 AND punta != -1 AND puntd !=-1
 
-$sql = "INSERT INTO `games`(`ida`,`idd`) VALUES ('" . $_GET['ida'] . "','". $_GET['idd'] ."')" ;
+	
+}
+if(isset($_GET['puntd'])){
+	$sql = "UPDATE `games` SET `puntd`=" . $_GET['puntd'] . " WHERE `gameid` = " + $_GET['gameid'] ;
+	$result = $conn->query($sql);
+}
+$sql = "SELECT * FROM games WHERE gameid = " . $_GET['gameid'] . " AND punta != -1 AND puntd !=-1";
 $result = $conn->query($sql);
-
-//echo $sql;
-
-//SELECT `gameid`  FROM `games` WHERE `ida` = 4 and `idd` = 5 and `punta` = -1 and `puntd` = -1
-$sql = "SELECT gameid FROM games WHERE ida = '" . $_GET['ida'] . "' AND idd = '".$_GET['idd'] .
-"' AND punta = '-1' AND puntd = '-1'";
-
-
-//echo $sql;
-
-$result = $conn->query($sql);
-
-
-$row= $result->fetch_row();
-$arr = array('gameid' =>  $row[0]);
-echo json_encode($arr);
-
-
+if(mysqli_num_rows($result) == 1){
+	$row=$result->fetch_assoc();
+	if($row['punta']>=$row['puntd']){
+		$sql = "UPDATE users SET punt=punt + 2 WHERE id = '". $row['ida'] ."'";
+		$result = $conn->query($sql);
+		$sql = "UPDATE users SET punt=punt - 1 WHERE id = '". $row['idd'] ."'";
+		$result = $conn->query($sql);
+	}
+	$sql= "DELETE * FROM games WHERE gameid = " . $_GET['gameid'] . " AND punta != -1 AND puntd !=-1";
+	$result = $conn->query($sql);
+}
 ?>
