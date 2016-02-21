@@ -5,7 +5,7 @@ using System.Collections;
 
  
 
-public class Login : MonoBehaviour {
+public class Login_new : MonoBehaviour {
 
     public Text userName;
 
@@ -23,7 +23,7 @@ public class Login : MonoBehaviour {
         Debug.Log(web.text);
         Getuserid myObject = new Getuserid();
         JsonUtility.FromJsonOverwrite(web.text, myObject);
-        Debug.Log(myObject.id);
+        Debug.Log("User ID: " + myObject.id);
         GameController.instance.ID = myObject.id;
         SceneManager.LoadScene("menu");
     }
